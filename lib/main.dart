@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:moment/screens/login.dart';
+import 'package:moment/screens/login_mobile.dart';
 import 'package:get/get.dart';
 void main() {
   runApp(GetMaterialApp(
@@ -7,6 +7,6 @@ void main() {
       primarySwatch: Colors.green,
 
     ),
-    home:const Login(),
+    home:const LoginMobile(),
   ));
 }

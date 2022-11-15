@@ -34,7 +34,7 @@ const double cmTextFieldScrollPadding = 120;
 ///***CmButton
 const Color cmButtonColor = Colors.white;
 const Color cmButtonBackgroundColor = primaryColor;
-const Color cmButtonBorderColor = primaryColor;
+const Color cmButtonBorderColor = Colors.transparent;
 const Color cmButtonBoxShadowColor = Colors.transparent;
 const double cmButtonPadding = 15.0;
 const double cmButtonBorderRadius = 16;

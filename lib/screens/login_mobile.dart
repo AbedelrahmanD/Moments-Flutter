@@ -5,6 +5,7 @@ import 'package:country_pickers/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:moment/helpers/config.dart';
 import 'package:moment/helpers/widgets/cm_container.dart';
+import 'package:moment/screens/login_code.dart';
 import 'package:moment/utils/constants.dart';
 import 'package:moment/widgets/mm_button.dart';
 import 'package:moment/widgets/mm_scaffold.dart';
@@ -13,14 +14,16 @@ import 'package:get/get.dart';
 import 'package:moment/screens/home.dart';
 import 'package:moment/widgets/mm_logo.dart';
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+class LoginMobile extends StatefulWidget {
+  const LoginMobile({Key? key}) : super(key: key);
 
   @override
-  State<Login> createState() => _LoginState();
+  State<LoginMobile> createState() => _LoginMobileState();
 }
 
-class _LoginState extends State<Login> {
+class _LoginMobileState extends State<LoginMobile> {
+
+  TextEditingController mobileController = TextEditingController();
 
   Country _selectedDialogCountry =
   CountryPickerUtils.getCountryByPhoneCode('961');
@@ -97,6 +100,7 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     MMTextField(
+                      controller: mobileController,
                       width: widthAccordingRation(context,219),
                       text: "Mobile Number",
                     ),
@@ -106,9 +110,10 @@ class _LoginState extends State<Login> {
                   height: heightAccordingRation(context,80),
                 ),
                 MMButton(
-                  width: Get.width,
+                  color: primaryColor,
+                  width: width(context),
                   onPressed: () {
-                    Get.off(() => const Home());
+                    Get.to(() => const LoginCode());
                   },
                   text: "Next",
                 )

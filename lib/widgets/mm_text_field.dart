@@ -11,19 +11,22 @@ class MMTextField extends StatelessWidget {
   final String? actionText;
   final Color actionColor;
   final double width;
+  final TextEditingController controller;
+  final Function(String)? onChanged;
    Color? actionBackgroundColor;
   final Function()? onSuffixIconTap;
 
-   MMTextField({Key? key, this.text = "",this.onSuffixIconTap,this.actionText,this.actionColor=Colors.white,this.actionBackgroundColor, required this.width}) : super(key: key);
+   MMTextField({Key? key, this.text = "",required this.controller,this.onChanged,this.onSuffixIconTap,this.actionText,this.actionColor=Colors.white,this.actionBackgroundColor, required this.width}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CmTextField(
+      controller: controller,
       marginTop: 0,
       marginBottom: 0,
       hintText: text,
       onSuffixIconTap: onSuffixIconTap,
-
+      onChanged: onChanged,
         borderColor:const Color(0xFFF2F2F2),
       width: width,
       labelTextColor:const Color(0xFFC4C4C6) ,
