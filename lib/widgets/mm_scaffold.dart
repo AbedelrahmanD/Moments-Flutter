@@ -38,7 +38,7 @@ class MMScaffold extends StatelessWidget {
                 body: Container(
                     width: Get.width,
                     height: Get.height,
-                    padding:  EdgeInsets.all(widthAccordingRation(16)), child: body),
+                    padding:  EdgeInsets.all(widthAccordingRation(context,16)), child: body),
               )
           );
         });

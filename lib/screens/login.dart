@@ -74,14 +74,14 @@ class _LoginState extends State<Login> {
               children: [
                 const MMLogo(),
                  SizedBox(
-                  height: heightAccordingRation(48),
+                  height: heightAccordingRation(context,48),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CmContainer(
-                      width: widthAccordingRation(114),
+                      width: widthAccordingRation(context,114),
                       // width: widthAccordingRation(114),
                       height: 48,
                       isClipHardEdge: true,
@@ -97,13 +97,13 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     MMTextField(
-                      width: widthAccordingRation(219),
+                      width: widthAccordingRation(context,219),
                       text: "Mobile Number",
                     ),
                   ],
                 ),
                 SizedBox(
-                  height: heightAccordingRation(80),
+                  height: heightAccordingRation(context,80),
                 ),
                 MMButton(
                   width: Get.width,
