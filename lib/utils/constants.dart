@@ -7,12 +7,12 @@ double designScreenHeight = 812.0;
 
 
 double widthAccordingRation (double width){
-  double widthScreenRation = Get.width/designScreenWidth;
+  double widthScreenRation = width/designScreenWidth;
   return width * widthScreenRation;
 }
 
 double heightAccordingRation (double height){
-  double heightScreenRation = Get.height/designScreenHeight;
+  double heightScreenRation = height/designScreenHeight;
   return height * heightScreenRation;
 }
 

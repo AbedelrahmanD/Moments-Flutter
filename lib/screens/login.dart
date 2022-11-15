@@ -5,7 +5,6 @@ import 'package:country_pickers/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:moment/helpers/config.dart';
 import 'package:moment/helpers/widgets/cm_container.dart';
-import 'package:moment/screens/mobile.dart';
 import 'package:moment/utils/constants.dart';
 import 'package:moment/widgets/mm_button.dart';
 import 'package:moment/widgets/mm_scaffold.dart';
@@ -109,7 +108,7 @@ class _LoginState extends State<Login> {
                 MMButton(
                   width: Get.width,
                   onPressed: () {
-                    Get.off(() => const Mobile());
+                    Get.off(() => const Home());
                   },
                   text: "Next",
                 )
