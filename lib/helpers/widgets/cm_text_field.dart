@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:moment/utils/constants.dart';
 import 'cm_container.dart';
 import '../config.dart';
 
@@ -141,9 +142,10 @@ class _CmTextFieldState extends State<CmTextField> {
       widget.filter = FilteringTextInputFormatter.deny(RegExp('[ ]'));
     }
     return CmContainer(
-      isClipHardEdge: false,
+      paddingAll: 0,
+      isClipHardEdge: true,
       width: widget.width,
-      height: 70,
+      // height: 48,
       marginTop: widget.marginTop,
       marginBottom: widget.marginBottom,
       child: TextField(
@@ -175,8 +177,9 @@ class _CmTextFieldState extends State<CmTextField> {
         ),
 
         decoration: InputDecoration(
-
-          prefixIcon: Icon(
+          isDense: true,
+          contentPadding: const EdgeInsets.symmetric(vertical: 14.5,horizontal: 15 ),
+          prefixIcon: widget.iconData == null? null:Icon(
             widget.iconData,
             color: cmTextFieldIconColor,
           ),

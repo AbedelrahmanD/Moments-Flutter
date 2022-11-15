@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moment/utils/constants.dart';
 import 'cm_container.dart';
 import '../config.dart';
 
@@ -11,6 +12,7 @@ class CmButton extends StatelessWidget {
   final double borderRadius;
   final Color borderColor;
   final double width;
+  final double height;
   final double marginTop;
   final double marginBottom;
   final Color boxShadowColor;
@@ -28,6 +30,7 @@ class CmButton extends StatelessWidget {
     this.borderWidth = cmButtonBorderWidth,
     this.borderColor = cmButtonBorderColor,
     this.width = cmButtonWidth,
+    this.height = cmButtonHeight,
     this.marginTop=cmButtonMarginTop,
     this.marginBottom=cmButtonMarginBottom,
     this.boxShadowColor = cmButtonBoxShadowColor,
@@ -49,12 +52,12 @@ class CmButton extends StatelessWidget {
       marginBottom: marginBottom,
       borderRadiusAll: borderRadius,
       width: width,
+      height: height,
       child: ElevatedButton(
         onPressed: onPressed,
         clipBehavior: Clip.hardEdge,
         style: TextButton.styleFrom(
           padding: EdgeInsets.all(padding),
-          foregroundColor: Colors.white,
           backgroundColor: backgroundColor,
           shape: RoundedRectangleBorder(
             side: BorderSide(width: borderWidth, color: borderColor),

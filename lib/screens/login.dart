@@ -1,7 +1,14 @@
+
+import 'package:country_pickers/country.dart';
+import 'package:country_pickers/country_picker_dialog.dart';
+import 'package:country_pickers/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:moment/helpers/config.dart';
+import 'package:moment/helpers/widgets/cm_container.dart';
+import 'package:moment/screens/mobile.dart';
+import 'package:moment/utils/constants.dart';
 import 'package:moment/widgets/mm_button.dart';
 import 'package:moment/widgets/mm_scaffold.dart';
-import 'package:moment/helpers/widgets/cm_text.dart';
 import 'package:moment/widgets/mm_text_field.dart';
 import 'package:get/get.dart';
 import 'package:moment/screens/home.dart';
@@ -15,50 +22,96 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+
+  Country _selectedDialogCountry =
+  CountryPickerUtils.getCountryByPhoneCode('961');
+
+
+  void _openCountryPickerDialog() => showDialog(
+    context: context,
+    builder: (context) => Theme(
+      data: Theme.of(context).copyWith(primaryColor: Colors.pink),
+      child: CountryPickerDialog(
+        titlePadding: const EdgeInsets.all(8.0),
+        searchCursorColor: primaryColor,
+        searchInputDecoration: const InputDecoration(hintText: 'Search...'),
+        isSearchable: true,
+        title: const Text('Select your phone code'),
+        onValuePicked: (Country country) =>
+            setState(() => _selectedDialogCountry = country),
+        itemBuilder: _buildDialogItem,
+        itemFilter: (c) => ['AR', 'DE', 'GB', 'CN'].contains(c.isoCode),
+
+        priorityList: [
+          CountryPickerUtils.getCountryByIsoCode('LB'),
+          CountryPickerUtils.getCountryByIsoCode('US'),
+        ],
+      ),
+    ),
+  );
+
+
+  Widget _buildDialogItem(Country country) =>
+      Row(
+    children: <Widget>[
+      CountryPickerUtils.getDefaultFlagImage(country),
+      const SizedBox(width: 8.0),
+      Text("+${country.phoneCode}"),
+      const SizedBox(width: 8.0),
+      Flexible(child: Text(country.name))
+    ],
+  );
+
+
   @override
   Widget build(BuildContext context) {
     return MMScaffold(
         backgroundColor: Colors.white,
-        body: SafeArea(
+        body: Center(
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(
-                  height: Get.height * 0.2,
-                ),
                 const MMLogo(),
-                const SizedBox(
-                  height: 20,
+                 SizedBox(
+                  height: heightAccordingRation(48),
                 ),
-                MMTextField(
-                  text: "Mobile Number",
-                  actionText: "Verify",
-                  onSuffixIconTap: () {},
-                ),
-                MMTextField(
-                  text: "Verification Code",
-                  actionText: "Resend",
-                  actionColor: Colors.grey,
-                  actionBackgroundColor: Colors.white,
-                  onSuffixIconTap: () {},
-                ),
-                const CmText(
-                  text:
-                      "By clicking start you agree to our Term of services and Privacy policy",
-                  color: Colors.grey,
-                  fontSize: 14,
-                  align: TextAlign.center,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    CmContainer(
+                      width: widthAccordingRation(114),
+                      // width: widthAccordingRation(114),
+                      height: 48,
+                      isClipHardEdge: true,
+                      borderRadiusAll: 16,
+                      borderWidthAll: 1,
+                      borderColor: const Color(0xFFF2F2F2),
+                      child: InkWell(
+                        onTap: _openCountryPickerDialog,
+                        child: Padding(
+                          padding: const EdgeInsets.all(14),
+                          child: _buildDialogItem(_selectedDialogCountry),
+                        ),
+                      ),
+                    ),
+                    MMTextField(
+                      width: widthAccordingRation(219),
+                      text: "Mobile Number",
+                    ),
+                  ],
                 ),
                 SizedBox(
-                  height: Get.height * 0.15,
+                  height: heightAccordingRation(80),
                 ),
                 MMButton(
+                  width: Get.width,
                   onPressed: () {
-                    Get.off(() => const Home());
+                    Get.off(() => const Mobile());
                   },
-                  text: "Start",
+                  text: "Next",
                 )
               ],
             ),
@@ -66,3 +119,5 @@ class _LoginState extends State<Login> {
         ));
   }
 }
+
+
