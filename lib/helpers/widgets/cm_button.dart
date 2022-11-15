@@ -20,6 +20,7 @@ class CmButton extends StatelessWidget {
   final double blurRadius;
   final Offset offset;
   final VoidCallback? onPressed;
+  final double elevation;
 
   const CmButton({Key? key,
     required this.child,
@@ -38,6 +39,7 @@ class CmButton extends StatelessWidget {
     this.blurRadius = 5,
     this.offset = const Offset(0, 1),
     this.onPressed,
+    this.elevation=cmButtonElevation
   })
       : super(key: key);
 
@@ -55,10 +57,12 @@ class CmButton extends StatelessWidget {
       height: height,
       child: ElevatedButton(
         onPressed: onPressed,
+
         clipBehavior: Clip.hardEdge,
         style: TextButton.styleFrom(
           padding: EdgeInsets.all(padding),
           backgroundColor: backgroundColor,
+          elevation: elevation,
           shape: RoundedRectangleBorder(
             side: BorderSide(width: borderWidth, color: borderColor),
             borderRadius: BorderRadius.circular(borderRadius), // <-- Radius

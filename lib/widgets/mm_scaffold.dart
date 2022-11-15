@@ -9,8 +9,9 @@ class MMScaffold extends StatelessWidget {
   final Widget? appBar;
   final Widget body;
   Color? backgroundColor;
+  final double appBarSize;
 
-  MMScaffold({Key? key, this.appBar, required this.body, this.backgroundColor})
+  MMScaffold({Key? key, this.appBar, required this.body, this.backgroundColor,this.appBarSize=97})
       : super(key: key);
 
   @override
@@ -32,7 +33,7 @@ class MMScaffold extends StatelessWidget {
               child:Scaffold(
                 backgroundColor: backgroundColor,
                 appBar: PreferredSize(
-                  preferredSize: const Size.fromHeight(100),
+                  preferredSize:  Size.fromHeight(appBarSize),
                   child: appBar ?? const PreferredSize( preferredSize: Size.fromHeight(0),child:SizedBox(height: 0,)),
                 ),
                 body: Container(

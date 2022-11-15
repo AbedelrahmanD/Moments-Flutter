@@ -43,6 +43,7 @@ const double cmButtonWidth = 300;
 const double cmButtonHeight = 56;
 const double cmButtonMarginTop = 10;
 const double cmButtonMarginBottom = 10;
+const double cmButtonElevation=0;
 
 ///***CmCachedNetworkImage
 const Widget cmCachedNetworkImagePlaceholder=CircularProgressIndicator();

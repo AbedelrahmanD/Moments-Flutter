@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moment/helpers/config.dart';
+import 'package:moment/screens/profile.dart';
 import 'package:moment/utils/constants.dart';
 import 'package:moment/widgets/mm_button.dart';
 import 'package:moment/widgets/mm_logo.dart';
@@ -50,7 +51,7 @@ class _LoginCodeState extends State<LoginCode> {
                   textColor: codeController.text.isEmpty?const Color(0x3C3C434D):Colors.white,
                   width: width(context),
                   onPressed: () {
-                    Get.off(() => const LoginCode());
+                    Get.to(() => const Profile());
                   },
                   text: "Next",
                 )
