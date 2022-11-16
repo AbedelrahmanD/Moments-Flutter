@@ -67,101 +67,91 @@ class _NetworkState extends State<Network> {
             ),
           ),
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              CmContainer(
-                height: 64,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: networkOptions.length,
-                  itemBuilder: (context, i) {
-                    return InkWell(
-                      onTap: () {
-                        setState(() {
-                          selectedNetworkOptionId = networkOptions[i]["id"];
-                        });
-                      },
-                      child: MMShip(
-                        onTap: (){},
-                        text: networkOptions[i]["title"],
-                        backgroundColor:
-                            networkOptions[i]["id"] == selectedNetworkOptionId
-                                ? primaryColor
-                                : Colors.white,
-                        color:
-                            networkOptions[i]["id"] == selectedNetworkOptionId
-                                ? Colors.white
-                                : Colors.grey,
-                      ),
-                    );
-                  },
-                ),
+        body: Column(
+          children: [
+            CmContainer(
+              height: 64,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: networkOptions.length,
+                itemBuilder: (context, i) {
+                  return InkWell(
+                    onTap: () {
+                      setState(() {
+                        selectedNetworkOptionId = networkOptions[i]["id"];
+                      });
+                    },
+                    child: MMShip(
+                      onTap: (){},
+                      text: networkOptions[i]["title"],
+                      backgroundColor:
+                          networkOptions[i]["id"] == selectedNetworkOptionId
+                              ? primaryColor
+                              : Colors.white,
+                      color:
+                          networkOptions[i]["id"] == selectedNetworkOptionId
+                              ? Colors.white
+                              : Colors.grey,
+                    ),
+                  );
+                },
               ),
+            ),
 
-              CmContainer(
+            Expanded(
+              child: CmContainer(
                   color: Colors.white,
                   borderRadiusAll: 16,
                   width: widthAccordingRation(context, 341),
                   height: heightAccordingRation(context, 531),
-                  child: SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        ListView.builder(
-                          shrinkWrap: true,
-                          physics: const ScrollPhysics(),
-                          // primary: false,
-                          itemCount: users.length,
-                          itemBuilder: (context, i) {
-                            return CmContainer(
-                              paddingAll: 15,
-                              borderWidthBottom: 1,
-                              borderColor: const Color(0xffDFD8D0),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: [
-                                  Row(
-                                    children: [
-                                      CmContainer(
-                                          width: widthAccordingRation(context, 32),
-                                          height:
-                                              heightAccordingRation(context, 32),
-                                          child: Image.asset(
-                                              "assets/images/${users[i]["image"]}")),
-                                      SizedBox(
-                                        width: widthAccordingRation(context, 8),
-                                      ),
-                                      CmText(
-                                        text: users[i]["name"],
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ],
-                                  ),
-                                  CmButton(
-                                      width: widthAccordingRation(context, 86),
-                                      height: heightAccordingRation(context, 29),
-                                      backgroundColor: Colors.white,
-                                      borderColor: Color(0xffA761C4),
-                                      borderWidth: 1,
-                                      padding: 0,
-                                      borderRadius: 100,
-                                      child: const CmText(
-                                        text: "Remove",
-                                        fontSize: 17,
-                                        color: Color(0xffA761C4),
-                                      ))
-                                ],
-                              ),
-                            );
-                          },
+                  child: ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                    itemCount: users.length,
+                    itemBuilder: (context, i) {
+                      return CmContainer(
+                        paddingAll: 15,
+                        borderWidthBottom: 1,
+                        borderColor: const Color(0xffDFD8D0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Row(
+                              children: [
+                                CmContainer(
+                                    width: widthAccordingRation(context, 32),
+                                    height:
+                                        heightAccordingRation(context, 32),
+                                    child: Image.asset(
+                                        "assets/images/${users[i]["image"]}")),
+                                SizedBox(
+                                  width: widthAccordingRation(context, 8),
+                                ),
+                                CmText(
+                                  text: users[i]["name"],
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ],
+                            ),
+                            CmButton(
+                                width: widthAccordingRation(context, 86),
+                                height: heightAccordingRation(context, 29),
+                                backgroundColor: Colors.white,
+                                borderColor: Color(0xffA761C4),
+                                borderWidth: 1,
+                                padding: 0,
+                                borderRadius: 100,
+                                child: const CmText(
+                                  text: "Remove",
+                                  fontSize: 17,
+                                  color: Color(0xffA761C4),
+                                ))
+                          ],
                         ),
-                      ],
-                    ),
-                  ))
-            ],
-          ),
+                      );
+                    },
+                  )),
+            )
+          ],
         ));
   }
 }
