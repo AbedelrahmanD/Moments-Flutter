@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:moment/helpers/widgets/cm_button.dart';
 import 'package:moment/helpers/widgets/cm_text.dart';
+import 'package:moment/utils/constants.dart';
 
 class MMAppBar extends StatelessWidget {
   final String title;
@@ -20,11 +21,14 @@ class MMAppBar extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       decoration: const BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))),
-      padding: const EdgeInsets.fromLTRB(10, 20, 10, 0),
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(16))),
+      padding:  const EdgeInsets.fromLTRB(10, 8, 10,16),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           AppBar(
+            leadingWidth: 40,
             iconTheme: const IconThemeData(
               color: Colors.black,
             ),

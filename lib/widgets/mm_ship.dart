@@ -2,34 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:moment/helpers/config.dart';
 import 'package:moment/helpers/widgets/cm_container.dart';
 import 'package:moment/helpers/widgets/cm_text.dart';
+import 'package:moment/utils/constants.dart';
 class MMShip extends StatelessWidget {
   final String text;
   final Color? color;
   final Color? backgroundColor;
-  const MMShip({Key? key,this.text="",this.color,this.backgroundColor}) : super(key: key);
+  final VoidCallback onTap;
+  const MMShip({Key? key,this.text="",this.color,this.backgroundColor, required this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return CmContainer(
+    return InkWell(
+      onTap: onTap,
       child: CmContainer(
-          minWidth: 50,
-          height: 30,
-          color:backgroundColor?? primaryColor,
-          borderRadiusAll: 100,
-          marginEnd: 5,
-          child: Center(
-            child: Row(
-              children: [
-               const SizedBox(width: 10,),
-                CmText(
-                  text: text,
-                  color:color?? Colors.white,
-                  align: TextAlign.center,
-                ),
-                const SizedBox(width: 10,),
-              ],
-            ),
-          )),
+        marginBottom: 24,
+        marginTop: 16,
+        child: CmContainer(
+            width: widthAccordingRation(context, 104),
+            height: heightAccordingRation(context, 24),
+            color:backgroundColor?? primaryColor,
+            borderRadiusAll: 16,
+            marginEnd: 8,
+            child: Center(
+              child: CmText(
+                text: text,
+                fontSize: 14,
+                color:color?? Colors.white,
+                align: TextAlign.center,
+              ),
+            )),
+      ),
     );
   }
 }

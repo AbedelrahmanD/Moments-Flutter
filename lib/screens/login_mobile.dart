@@ -7,11 +7,11 @@ import 'package:moment/helpers/config.dart';
 import 'package:moment/helpers/widgets/cm_container.dart';
 import 'package:moment/screens/login_code.dart';
 import 'package:moment/utils/constants.dart';
+import 'package:moment/widgets/alert_box.dart';
 import 'package:moment/widgets/mm_button.dart';
 import 'package:moment/widgets/mm_scaffold.dart';
 import 'package:moment/widgets/mm_text_field.dart';
 import 'package:get/get.dart';
-import 'package:moment/screens/home.dart';
 import 'package:moment/widgets/mm_logo.dart';
 
 class LoginMobile extends StatefulWidget {
@@ -42,11 +42,10 @@ class _LoginMobileState extends State<LoginMobile> {
         onValuePicked: (Country country) =>
             setState(() => _selectedDialogCountry = country),
         itemBuilder: _buildDialogItem,
-        itemFilter: (c) => ['AR', 'DE', 'GB', 'CN'].contains(c.isoCode),
 
         priorityList: [
+          CountryPickerUtils.getCountryByIsoCode('SA'),
           CountryPickerUtils.getCountryByIsoCode('LB'),
-          CountryPickerUtils.getCountryByIsoCode('US'),
         ],
       ),
     ),
@@ -103,6 +102,10 @@ class _LoginMobileState extends State<LoginMobile> {
                       controller: mobileController,
                       width: widthAccordingRation(context,219),
                       text: "Mobile Number",
+                      onChanged: (value){
+                        setState(() {
+                        });
+                      },
                     ),
                   ],
                 ),
@@ -110,10 +113,16 @@ class _LoginMobileState extends State<LoginMobile> {
                   height: heightAccordingRation(context,80),
                 ),
                 MMButton(
-                  color: primaryColor,
+                  color: mobileController.text.isEmpty?const Color(0xFFF2F2F2):primaryColor,
+                  textColor: mobileController.text.isEmpty?const Color(0x3C3C434D):Colors.white,
                   width: width(context),
                   onPressed: () {
-                    Get.to(() => const LoginCode());
+                    if(mobileController.text.isEmpty){
+                      showAlert("Please Add Your Phone Number!");
+                    }
+                    else {
+                      Get.to(() => const LoginCode());
+                    }
                   },
                   text: "Next",
                 )

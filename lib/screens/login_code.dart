@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moment/helpers/config.dart';
+import 'package:moment/screens/login_name.dart';
 import 'package:moment/screens/profile.dart';
 import 'package:moment/utils/constants.dart';
+import 'package:moment/widgets/alert_box.dart';
 import 'package:moment/widgets/mm_button.dart';
 import 'package:moment/widgets/mm_logo.dart';
 import 'package:moment/widgets/mm_scaffold.dart';
@@ -21,6 +23,7 @@ class _LoginCodeState extends State<LoginCode> {
   @override
   Widget build(BuildContext context) {
     return MMScaffold(
+
         backgroundColor: Colors.white,
         body: Center(
           child: SingleChildScrollView(
@@ -51,7 +54,12 @@ class _LoginCodeState extends State<LoginCode> {
                   textColor: codeController.text.isEmpty?const Color(0x3C3C434D):Colors.white,
                   width: width(context),
                   onPressed: () {
-                    Get.to(() => const Profile());
+                    if(codeController.text.isEmpty){
+                      showAlert("Please fill the verification code!");
+                    }
+                    else {
+                      Get.to(() => const LoginName());
+                    }
                   },
                   text: "Next",
                 )

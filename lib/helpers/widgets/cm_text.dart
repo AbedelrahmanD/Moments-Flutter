@@ -8,6 +8,7 @@ class CmText extends StatelessWidget {
   final FontWeight fontWeight;
   final FontStyle fontStyle;
   final Color color;
+  final TextDecoration? decoration;
   final bool isFitted;
   final String fontFamily;
   final List<String> fontFamilyFallBack;
@@ -20,6 +21,7 @@ class CmText extends StatelessWidget {
       this.fontWeight = FontWeight.normal,
       this.fontStyle = FontStyle.normal,
       this.color = Colors.black,
+        this.decoration,
       this.isFitted = false,
       this.fontFamily = textFontFamily,
       this.fontFamilyFallBack = textFontFamilyFallback,
@@ -32,6 +34,7 @@ class CmText extends StatelessWidget {
       text,
       textAlign: align,
       style: TextStyle(
+        decoration: decoration,
           fontSize: fontSize,
           fontWeight: fontWeight,
           color: color,

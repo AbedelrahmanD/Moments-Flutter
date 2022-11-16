@@ -38,6 +38,7 @@ dependencies:
   extended_image: ^6.2.1
 
   country_pickers: ^2.0.0
+  flutter_svg: ^1.1.6
 
 
   # The following adds the Cupertino Icons font to your application.
