@@ -25,9 +25,18 @@ class _LoginNameState extends State<LoginName> {
   @override
   Widget build(BuildContext context) {
     return MMScaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          iconTheme: const IconThemeData(
+            color: primaryColor,
+          ),
+        ),
+        appBarSize: 50,
         backgroundColor: Colors.white,
         body: Center(
           child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -48,6 +57,7 @@ class _LoginNameState extends State<LoginName> {
                   controller: nameController,
                   width: widthAccordingRation(context,341),
                   text: "Real Name",
+                  autofocus: true,
                   onChanged: (value){
                     setState(() {
 
@@ -82,7 +92,7 @@ class _LoginNameState extends State<LoginName> {
                   width: width(context),
                   onPressed: () {
                     if(nameController.text.isEmpty){
-                      showAlert("Please Fill Your Name!");
+                      showAlert(title: "Please Fill Your Name!");
                     }
                     else {
                       Get.to(() => const Home());

@@ -7,22 +7,16 @@ import 'package:moment/helpers/widgets/cm_text_field.dart';
 import 'package:moment/utils/constants.dart';
 import 'package:moment/widgets/mm_app_bar.dart';
 import 'package:moment/widgets/mm_scaffold.dart';
-import 'package:moment/widgets/mm_ship.dart';
 
-class Network extends StatefulWidget {
-  const Network({Key? key}) : super(key: key);
+class InvitePeople extends StatefulWidget {
+  const InvitePeople({Key? key}) : super(key: key);
 
   @override
-  State<Network> createState() => _NetworkState();
+  _InvitePeopleState createState() => _InvitePeopleState();
 }
 
-class _NetworkState extends State<Network> {
-  int selectedNetworkOptionId = 1;
-  List networkOptions = [
-    {"id": 1, "title": "Connections"},
-    {"id": 2, "title": "Followings"},
-    {"id": 3, "title": "Followers"}
-  ];
+class _InvitePeopleState extends State<InvitePeople> {
+
   List users = [
     {"image": "profile.png", "name": "Ahmad Mohamed"},
     {"image": "profile.png", "name": "Ahmad Mohamed"},
@@ -41,27 +35,27 @@ class _NetworkState extends State<Network> {
     {"image": "profile.png", "name": "Ahmad Mohamed"},
     {"image": "profile.png", "name": "Ahmad zzzzzzzzzzz"}
   ];
-
   @override
   Widget build(BuildContext context) {
     return MMScaffold(
         appBarSize: 150,
         appBar: MMAppBar(
-          title: "Network",
+          title: "Add people",
           appBarExtends: CmTextField(
             borderColor: const Color(0xFFF2F2F2),
-            hintText: "Search Your Connections",
+            hintText: "Name or Mobile Number",
             suffixWidget: CmContainer(
               width: widthAccordingRation(context, 81),
+              height: 29,
               paddingAll: 7,
               child: CmContainer(
-                borderRadiusAll: 100,
+                borderRadiusAll: 16,
                 color: primaryColor,
                 child: const Center(
                   child: CmText(
-                    color: Colors.white,
                     fontSize: 14,
-                    text: "Search",
+                    color: Colors.white,
+                    text: "Invite",
                     align: TextAlign.center,
                   ),
                 ),
@@ -71,35 +65,6 @@ class _NetworkState extends State<Network> {
         ),
         body: Column(
           children: [
-            CmContainer(
-              height: 64,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: networkOptions.length,
-                itemBuilder: (context, i) {
-                  return InkWell(
-                    onTap: () {
-                      setState(() {
-                        selectedNetworkOptionId = networkOptions[i]["id"];
-                      });
-                    },
-                    child: MMShip(
-                      onTap: (){},
-                      text: networkOptions[i]["title"],
-                      backgroundColor:
-                          networkOptions[i]["id"] == selectedNetworkOptionId
-                              ? primaryColor
-                              : Colors.white,
-                      color:
-                          networkOptions[i]["id"] == selectedNetworkOptionId
-                              ? Colors.white
-                              : Colors.grey,
-                    ),
-                  );
-                },
-              ),
-            ),
-
             Expanded(
               child: CmContainer(
                   color: Colors.white,
@@ -107,7 +72,7 @@ class _NetworkState extends State<Network> {
                   width: widthAccordingRation(context, 341),
                   height: heightAccordingRation(context, 531),
                   child: ListView.builder(
-                  physics: const BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     itemCount: users.length,
                     itemBuilder: (context, i) {
                       return CmContainer(
@@ -122,7 +87,7 @@ class _NetworkState extends State<Network> {
                                 CmContainer(
                                     width: widthAccordingRation(context, 32),
                                     height:
-                                        heightAccordingRation(context, 32),
+                                    heightAccordingRation(context, 32),
                                     child: Image.asset(
                                         "assets/images/${users[i]["image"]}")),
                                 SizedBox(
@@ -138,7 +103,7 @@ class _NetworkState extends State<Network> {
                                 width: widthAccordingRation(context, 86),
                                 height: heightAccordingRation(context, 29),
                                 backgroundColor: Colors.white,
-                                borderColor: Color(0xffA761C4),
+                                borderColor: const Color(0xffA761C4),
                                 borderWidth: 1,
                                 padding: 0,
                                 borderRadius: 100,

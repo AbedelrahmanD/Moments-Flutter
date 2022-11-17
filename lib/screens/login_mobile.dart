@@ -67,7 +67,15 @@ class _LoginMobileState extends State<LoginMobile> {
   @override
   Widget build(BuildContext context) {
     return MMScaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          iconTheme: const IconThemeData(
+            color: primaryColor,
+          ),
+        ),
         backgroundColor: Colors.white,
+        appBarSize: 50,
         body: Center(
           child: SingleChildScrollView(
             child: Column(
@@ -118,7 +126,7 @@ class _LoginMobileState extends State<LoginMobile> {
                   width: width(context),
                   onPressed: () {
                     if(mobileController.text.isEmpty){
-                      showAlert("Please Add Your Phone Number!");
+                      showAlert(title: "Please Add Your Phone Number!");
                     }
                     else {
                       Get.to(() => const LoginCode());

@@ -22,7 +22,7 @@ class MMAppBar extends StatelessWidget {
       decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(16))),
-      padding:  const EdgeInsets.fromLTRB(10, 8, 10,16),
+      padding:  const EdgeInsets.fromLTRB(17, 8, 17,16),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,

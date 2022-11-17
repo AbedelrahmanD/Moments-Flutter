@@ -10,8 +10,9 @@ class MMScaffold extends StatelessWidget {
   final Widget body;
   Color? backgroundColor;
   final double appBarSize;
+  final Widget bottomNavigationBar;
 
-  MMScaffold({Key? key, this.appBar, required this.body, this.backgroundColor,this.appBarSize=97})
+  MMScaffold({Key? key, this.appBar, required this.body, this.backgroundColor,this.appBarSize=97, this.bottomNavigationBar=const SizedBox()})
       : super(key: key);
 
   @override
@@ -40,7 +41,8 @@ class MMScaffold extends StatelessWidget {
                     width: Get.width,
                     height: Get.height,
                     padding:  EdgeInsets.only(left: widthAccordingRation(context,16),right: widthAccordingRation(context,16),top: widthAccordingRation(context,16)), child: body),
-              )
+                bottomNavigationBar: bottomNavigationBar,
+              ),
           );
         });
 

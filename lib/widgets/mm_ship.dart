@@ -19,7 +19,7 @@ class MMShip extends StatelessWidget {
         marginTop: 16,
         child: CmContainer(
             width: widthAccordingRation(context, 104),
-            height: heightAccordingRation(context, 24),
+            height: 24,
             color:backgroundColor?? primaryColor,
             borderRadiusAll: 16,
             marginEnd: 8,

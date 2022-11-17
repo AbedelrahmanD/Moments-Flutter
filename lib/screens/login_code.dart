@@ -23,11 +23,20 @@ class _LoginCodeState extends State<LoginCode> {
   @override
   Widget build(BuildContext context) {
     return MMScaffold(
-
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          iconTheme: const IconThemeData(
+            color: primaryColor,
+          ),
+        ),
+        appBarSize: 50,
         backgroundColor: Colors.white,
         body: Center(
           child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
             child: Column(
+              mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -41,6 +50,7 @@ class _LoginCodeState extends State<LoginCode> {
 
                     });
                   },
+                  autofocus: true,
                   controller: codeController,
                   width: widthAccordingRation(context,341),
                   text: "Verification Code",
@@ -55,7 +65,7 @@ class _LoginCodeState extends State<LoginCode> {
                   width: width(context),
                   onPressed: () {
                     if(codeController.text.isEmpty){
-                      showAlert("Please fill the verification code!");
+                      showAlert(title: "Please fill the verification code!");
                     }
                     else {
                       Get.to(() => const LoginName());

@@ -4,6 +4,7 @@ import 'package:moment/helpers/config.dart';
 import 'package:moment/helpers/widgets/cm_container.dart';
 import 'package:moment/helpers/widgets/cm_text.dart';
 import 'package:moment/screens/profile.dart';
+import 'package:moment/screens/search.dart';
 import 'package:moment/utils/constants.dart';
 import 'package:moment/widgets/home/mm_available_moment.dart';
 import 'package:moment/widgets/home/mm_md_container.dart';
@@ -93,9 +94,95 @@ class _HomeState extends State<Home> {
       selectedDate = index;
     });
   }
+    int pageIndex = 0;
+
+    final pages = [
+      // const Page1(),
+      // const Page2(),
+      // const Page3(),
+      // const Page4(),
+    ];
+
+    Container buildMyNavBar(BuildContext context) {
+      return Container(
+        height: 80,
+        decoration:const BoxDecoration(
+          color: Colors.white,
+          borderRadius:  BorderRadius.only(
+            topLeft: Radius.circular(16),
+            topRight: Radius.circular(16),
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              enableFeedback: false,
+              onPressed: () {
+                setState(() {
+                  pageIndex = 0;
+                });
+              },
+              icon: pageIndex == 0
+                  ? const Icon(
+                Icons.home_filled,
+                color: primaryColor,
+                size: 35,
+              )
+                  : const Icon(
+                Icons.home_outlined,
+                color: primaryColor,
+                size: 35,
+              ),
+            ),
+            IconButton(
+              enableFeedback: false,
+              onPressed: () {
+                setState(() {
+                  pageIndex = 1;
+                });
+              },
+              icon: pageIndex == 1
+                  ? const Icon(
+                Icons.work_rounded,
+                color: primaryColor,
+                size: 35,
+              )
+                  : const Icon(
+                Icons.work_outline_outlined,
+                color: primaryColor,
+                size: 35,
+              ),
+            ),
+            IconButton(
+              enableFeedback: false,
+              onPressed: () {
+                setState(() {
+                  pageIndex = 2;
+                });
+              },
+              icon: pageIndex == 2
+                  ? const Icon(
+                Icons.widgets_rounded,
+                color: primaryColor,
+                size: 35,
+              )
+                  : const Icon(
+                Icons.widgets_outlined,
+                color: primaryColor,
+                size: 35,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
 
   @override
   Widget build(BuildContext context) {
+
+
     return MMScaffold(
         appBar: MMAppBar(
           leading:     InkWell(
@@ -119,7 +206,9 @@ class _HomeState extends State<Home> {
                 shape: BoxShape.circle,
                 color: Color(0xFFF2F2F2),
               ),
-              child:  IconButton(onPressed: (){}, icon: const Icon(Icons.search,size: 16,color: Color(0x3C3C434D),),),
+              child:  IconButton(onPressed: (){
+                Get.to(()=> const Search());
+              }, icon: const Icon(Icons.search,size: 16,color: Color(0x3C3C434D),),),
             ),
           ],
         ),
@@ -210,8 +299,13 @@ class _HomeState extends State<Home> {
                   }),
             ],
           ),
-        ));
+        ),
+        bottomNavigationBar: buildMyNavBar(context),
+    );
+
   }
+
+
   Widget weekWidget (
       {
         required VoidCallback onTap,
