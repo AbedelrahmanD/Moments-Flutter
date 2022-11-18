@@ -1,9 +1,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.moment">
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
         android:label="Moment"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
+
+
+       <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyDBvg9h5vDqvkV8aTbS6lzA-6zZ_cJYnNY"/>
+
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -8,16 +8,18 @@ import 'package:moment/utils/constants.dart';
 class MMScaffold extends StatelessWidget {
   final Widget? appBar;
   final Widget body;
+   EdgeInsetsGeometry? bodyPadding;
   Color? backgroundColor;
   final double appBarSize;
   final Widget bottomNavigationBar;
 
-  MMScaffold({Key? key, this.appBar, required this.body, this.backgroundColor,this.appBarSize=97, this.bottomNavigationBar=const SizedBox()})
+  MMScaffold({Key? key, this.appBar, required this.body,this.bodyPadding, this.backgroundColor,this.appBarSize=97, this.bottomNavigationBar=const SizedBox()})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     backgroundColor ??= Color(0xffF2F2F2);
+    bodyPadding??=EdgeInsets.only(left: widthAccordingRation(context,16),right: widthAccordingRation(context,16),top: widthAccordingRation(context,16));
     return
       OrientationBuilder(
         builder: (context, orientation) {
@@ -40,7 +42,7 @@ class MMScaffold extends StatelessWidget {
                 body: Container(
                     width: Get.width,
                     height: Get.height,
-                    padding:  EdgeInsets.only(left: widthAccordingRation(context,16),right: widthAccordingRation(context,16),top: widthAccordingRation(context,16)), child: body),
+                    padding: bodyPadding, child: body),
                 bottomNavigationBar: bottomNavigationBar,
               ),
           );

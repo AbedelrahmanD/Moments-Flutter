@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:moment/helpers/widgets/cm_container.dart';
 import 'package:moment/helpers/widgets/cm_text.dart';
 import 'package:moment/screens/inbox.dart';
+import 'package:moment/screens/map_view.dart';
 import 'package:moment/screens/network.dart';
 import 'package:moment/screens/search.dart';
 import 'package:moment/screens/static_page.dart';
@@ -43,6 +44,11 @@ class _ProfileState extends State<Profile> {
       "image": "fi-rr-book-alt@2x.png",
       "title": "Inbox",
       "navigate":const Inbox(),
+    },
+    {
+      "image": "fi-rr-book-alt@2x.png",
+      "title": "Map",
+      "navigate":MapView(),
     },
   ];
 
