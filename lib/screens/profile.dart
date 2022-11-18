@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:moment/helpers/widgets/cm_container.dart';
 import 'package:moment/helpers/widgets/cm_text.dart';
 import 'package:moment/screens/network.dart';
+import 'package:moment/screens/search.dart';
+import 'package:moment/screens/static_page.dart';
 import 'package:moment/utils/constants.dart';
 import 'package:moment/widgets/mm_app_bar.dart';
 import 'package:moment/widgets/mm_logo.dart';
@@ -19,22 +21,22 @@ class _ProfileState extends State<Profile> {
     {
       "image": "fi-rr-book-alt@2x.png",
       "title": "Profile",
-      "navigate":Network(),
+      "navigate":const Network(),
     },
     {
       "image": "fi-rr-book-alt@2x.png",
       "title": "Network",
-      "navigate":Network(),
+      "navigate":const Network(),
     },
     {
       "image": "fi-rr-book-alt@2x.png",
       "title": "Term of Services",
-      "navigate":Network(),
+      "navigate":const StaticPage(id: 2),
     },
     {
       "image": "fi-rr-book-alt@2x.png",
       "title": "About",
-      "navigate":Network(),
+      "navigate":const StaticPage(id: 1),
     },
   ];
 
@@ -43,7 +45,19 @@ class _ProfileState extends State<Profile> {
     return MMScaffold(
         appBar: MMAppBar(
           custom: MMLogo(width: widthAccordingRation(context, 148)),
-          actions: [Icon(Icons.search)],
+          actions:  [
+            Container(
+              height: 32.0,
+              width: 32.0,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color(0xFFF2F2F2),
+              ),
+              child:  IconButton(onPressed: (){
+                Get.to(()=> const Search());
+              }, icon: const Icon(Icons.search,size: 16,color: Color(0x3C3C434D),),),
+            ),
+          ],
         ),
         body: SingleChildScrollView(
           child: Column(
