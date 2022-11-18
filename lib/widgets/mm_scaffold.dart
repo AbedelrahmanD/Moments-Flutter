@@ -17,7 +17,7 @@ class MMScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    backgroundColor ??= Colors.grey[200];
+    backgroundColor ??= Color(0xffF2F2F2);
     return
       OrientationBuilder(
         builder: (context, orientation) {

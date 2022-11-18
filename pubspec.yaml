@@ -112,5 +112,5 @@ flutter:
 
 
 flutter_native_splash:
-  color: "#ffffff"
+  color: "#F2F2F2"
   image: assets/images/logo_lg.png
