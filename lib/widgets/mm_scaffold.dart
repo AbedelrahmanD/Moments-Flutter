@@ -23,11 +23,11 @@ class MMScaffold extends StatelessWidget {
         builder: (context, orientation) {
           //check orientation variable to identiy the current mode
           if(orientation == Orientation.portrait){
-            print("The screen is in Portrait mode");
+            // print("The screen is in Portrait mode");
           }
 
           if(orientation == Orientation.landscape){
-            print("The screen is on Landscape mode.");
+            // print("The screen is on Landscape mode.");
           }
 
           return CmDirectionality(

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moment/helpers/config.dart';
 import 'package:moment/screens/login_name.dart';
-import 'package:moment/screens/profile.dart';
 import 'package:moment/utils/constants.dart';
 import 'package:moment/widgets/alert_box.dart';
 import 'package:moment/widgets/mm_button.dart';
@@ -15,10 +14,10 @@ class LoginCode extends StatefulWidget {
   const LoginCode({Key? key}) : super(key: key);
 
   @override
-  _LoginCodeState createState() => _LoginCodeState();
+  LoginCodeState createState() => LoginCodeState();
 }
 
-class _LoginCodeState extends State<LoginCode> {
+class LoginCodeState extends State<LoginCode> {
   TextEditingController codeController = TextEditingController();
   @override
   Widget build(BuildContext context) {

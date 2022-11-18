@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:moment/utils/constants.dart';
 import 'cm_container.dart';
 import '../config.dart';
 
@@ -46,6 +45,7 @@ class CmButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CmContainer(
+      color: Colors.redAccent,
       boxShadowColor: boxShadowColor,
       spreadRadius: spreadRadius,
         blurRadius: blurRadius,
@@ -57,7 +57,6 @@ class CmButton extends StatelessWidget {
       height: height,
       child: ElevatedButton(
         onPressed: onPressed,
-
         clipBehavior: Clip.hardEdge,
         style: TextButton.styleFrom(
           padding: EdgeInsets.all(padding),

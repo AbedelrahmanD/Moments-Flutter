@@ -14,12 +14,12 @@ class Search extends StatefulWidget {
   const Search({Key? key}) : super(key: key);
 
   @override
-  _SearchState createState() => _SearchState();
+  SearchState createState() => SearchState();
 }
 
 List searchResult = [];
 
-class _SearchState extends State<Search> {
+class SearchState extends State<Search> {
   TextEditingController searchController = TextEditingController();
 
   Country _selectedDialogCountry =
@@ -58,9 +58,6 @@ class _SearchState extends State<Search> {
 
   searchUsers(String value) {
     searchResult = [];
-    print("hello");
-    print(value);
-    print(searchResult.isNotEmpty);
     if(value != "") {
       searchResult = [
         {
@@ -157,7 +154,7 @@ class _SearchState extends State<Search> {
                                     // const SizedBox(
                                     //   height: 0,
                                     // ),
-                                    Divider(color: Color(0xFF625A63),)
+                                    const Divider(color: Color(0xFF625A63),)
                                   ],
                                 ));
                           },

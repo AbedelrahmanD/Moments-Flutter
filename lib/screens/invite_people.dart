@@ -12,10 +12,10 @@ class InvitePeople extends StatefulWidget {
   const InvitePeople({Key? key}) : super(key: key);
 
   @override
-  _InvitePeopleState createState() => _InvitePeopleState();
+  InvitePeopleState createState() => InvitePeopleState();
 }
 
-class _InvitePeopleState extends State<InvitePeople> {
+class InvitePeopleState extends State<InvitePeople> {
 
   List users = [
     {"image": "profile.png", "name": "Ahmad Mohamed"},

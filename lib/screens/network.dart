@@ -138,7 +138,7 @@ class _NetworkState extends State<Network> {
                                 width: widthAccordingRation(context, 86),
                                 height: heightAccordingRation(context, 29),
                                 backgroundColor: Colors.white,
-                                borderColor: Color(0xffA761C4),
+                                borderColor: const Color(0xffA761C4),
                                 borderWidth: 1,
                                 padding: 0,
                                 borderRadius: 100,

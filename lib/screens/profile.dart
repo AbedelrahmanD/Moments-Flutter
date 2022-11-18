@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:moment/helpers/widgets/cm_container.dart';
 import 'package:moment/helpers/widgets/cm_text.dart';
+import 'package:moment/screens/inbox.dart';
 import 'package:moment/screens/network.dart';
 import 'package:moment/screens/search.dart';
 import 'package:moment/screens/static_page.dart';
@@ -38,6 +39,7 @@ class _ProfileState extends State<Profile> {
       "title": "About",
       "navigate":const StaticPage(id: 1),
     },
+ 
   ];
 
   @override
@@ -82,7 +84,7 @@ class _ProfileState extends State<Profile> {
                       SizedBox(
                         height: heightAccordingRation(context, 8),
                       ),
-                      CmText(
+                      const CmText(
                         text: "Dr. Zaidan Alenezi",
                         fontSize: 28,
                         align: TextAlign.center,
@@ -92,7 +94,7 @@ class _ProfileState extends State<Profile> {
                         context,
                         8,
                       )),
-                      CmText(
+                      const CmText(
                         text: "+966506284840",
                         fontSize: 18,
                         align: TextAlign.center,
@@ -123,7 +125,7 @@ class _ProfileState extends State<Profile> {
                            child: CmContainer(
                                paddingAll: 15,
                                borderWidthBottom: i==profileOptions.length-1?0: 1,
-                               borderColor: Color(0xffDFD8D0),
+                               borderColor: const Color(0xffDFD8D0),
                                child: Row(
                                  children: [
                                    Image.asset(

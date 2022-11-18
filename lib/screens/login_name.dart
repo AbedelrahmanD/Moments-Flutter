@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moment/helpers/config.dart';
@@ -17,10 +16,10 @@ class LoginName extends StatefulWidget {
   const LoginName({Key? key}) : super(key: key);
 
   @override
-  _LoginNameState createState() => _LoginNameState();
+  LoginNameState createState() => LoginNameState();
 }
 
-class _LoginNameState extends State<LoginName> {
+class LoginNameState extends State<LoginName> {
   TextEditingController nameController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -68,7 +67,7 @@ class _LoginNameState extends State<LoginName> {
                   height: 8,
                 ),
                  Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 15.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
                   child: RichText(
                     textAlign: TextAlign.center,
                     text: const TextSpan(
