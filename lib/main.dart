@@ -4,6 +4,7 @@ import 'package:moment/screens/login_mobile.dart';
 import 'package:get/get.dart';
 void main() {
   runApp(GetMaterialApp(
+    debugShowCheckedModeBanner: false,
     theme: ThemeData(
       primarySwatch: primaryColorSwatch,
 

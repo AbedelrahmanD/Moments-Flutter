@@ -121,7 +121,22 @@ class _InboxState extends State<Inbox> {
                           width: 48,
                           height: 48,
                         ),
-                        CmText(text: inboxes[i]["name"]),
+                        const SizedBox(width: 8,),
+                        Flexible(
+                          child: RichText(
+                              text: TextSpan(
+                            text: inboxes[i]["name"]+" ",
+                            style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black),
+                            children: [
+
+                              TextSpan(
+                                text:  inboxes[i]["message"],
+                                style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal),
+                              )
+                            ]
+                          )),
+                        ),
+
                       ],
                     ),
                     const SizedBox(
