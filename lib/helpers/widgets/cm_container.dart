@@ -8,6 +8,7 @@ import '../config.dart';
 class CmContainer extends StatelessWidget {
   final Widget child;
   final Color color;
+  final BoxShape boxShape;
   final double paddingAll;
   double paddingStart;
   double paddingEnd;
@@ -49,6 +50,7 @@ class CmContainer extends StatelessWidget {
       {Key? key,
       required this.child,
       this.color = Colors.transparent,
+        this.boxShape=BoxShape.rectangle,
       this.paddingAll = 0,
       this.paddingStart = 0,
       this.paddingEnd = 0,
@@ -143,6 +145,7 @@ class CmContainer extends StatelessWidget {
               paddingBottom),
           decoration: BoxDecoration(
             color: color,
+            shape: boxShape,
             border: Border(
               left: BorderSide(
                 color: borderStart > 0 ? borderColor : Colors.transparent,

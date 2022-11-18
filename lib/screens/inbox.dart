@@ -79,11 +79,13 @@ class _InboxState extends State<Inbox> {
           fontWeight: FontWeight.bold,
         ),
         actions: [
-          CmContainer(
+          Container(
             height: 32.0,
             width: 32.0,
-            borderRadiusAll: 100,
-            color: const Color(0xFFF2F2F2),
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              color: Color(0xFFF2F2F2),
+            ),
             child: IconButton(
               onPressed: () {
                 Get.to(() => const Search());

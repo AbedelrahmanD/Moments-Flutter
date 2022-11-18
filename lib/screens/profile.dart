@@ -39,7 +39,11 @@ class _ProfileState extends State<Profile> {
       "title": "About",
       "navigate":const StaticPage(id: 1),
     },
- 
+    {
+      "image": "fi-rr-book-alt@2x.png",
+      "title": "Inbox",
+      "navigate":const Inbox(),
+    },
   ];
 
   @override
