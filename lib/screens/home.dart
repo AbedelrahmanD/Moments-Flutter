@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:moment/helpers/config.dart';
 import 'package:moment/helpers/widgets/cm_container.dart';
 import 'package:moment/helpers/widgets/cm_text.dart';
@@ -22,76 +23,29 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  var now = new DateTime.now();
     int selectedDate=0;
     int selectedType=0;
-  List categories = [
-    "All",
-    "Personal",
-    "Business",
-    "Restaurant",
-    "Cafe",
-    "Social",
-    "Sport",
-    "Entertainment",
-    "Appointment",
-    "Travel"
-  ];
+    String selectedTypeName = categories[0];
+    String selectedDay = "";
+    String month = "";
+    String year = "";
 
-  List days = [
-    {"dayName":"Monday","date":"7"},
-    {"dayName":"Today","date":"8"},
-    {"dayName":"Wednesday","date":"9"},
-    {"dayName":"Thursday","date":"10"},
-    {"dayName":"Friday","date":"11"},
-    {"dayName":"Saturday","date":"12"},
-    {"dayName":"Sunday","date":"13"}
-  ];
-
-  List moments =[
-    {
-    "time":"00:00 - 01:30",
-      "isAvailable": false,
-      "moment": {"username":"Dr. Zaidan Alenezi",
-                "momentName":"Watch the match",
-                "type":"Entertainment",
-                "location":"VOX Cinema - Red Sea Mall",
-                "people":"12 People"}
-    },
-    {
-      "time":"01:30 - 02:00",
-      "isAvailable": true,
-      "moment": null
-    },
-    {
-      "time":"02:00 - 04:30",
-      "isAvailable": false,
-      "moment": {"username":"Dr. Zaidan Alenezi","momentName":"Watch the match","type":"Entertainment","location":"Al Rabeea Café - Jeddah","people":"12 People"}
-    },
-    {
-      "time":"05:00 - 06:00",
-      "isAvailable": true,
-      "moment": null
-    },
-    {
-      "time":"06:00 - 07:00",
-      "isAvailable": true,
-      "moment": null
-    },
-    {
-      "time":"07:00 - 08:00",
-      "isAvailable": true,
-      "moment": null
-    },
-    {
-      "time":"08:00 - 11:00",
-      "isAvailable": false,
-      "moment": {"username":"Dr. Zaidan Alenezi","momentName":"Business Meeting","type":"Business","location":"Business Park","people":"12 People"}
-    },
-  ];
+  // List days = [
+  //   {"dayName":"Monday","date":"7","fullDate":"Monday November 19,2022"},
+  //   {"dayName":"Today","date":"8"},
+  //   {"dayName":"Wednesday","date":"9"},
+  //   {"dayName":"Thursday","date":"10"},
+  //   {"dayName":"Friday","date":"11"},
+  //   {"dayName":"Saturday","date":"12"},
+  //   {"dayName":"Sunday","date":"13"}
+  // ];
+  List days = [];
 
     void onChooseDate(int index) async{
     setState(() {
       selectedDate = index;
+      selectedDay = days[index]["fullDate"];
     });
   }
     int pageIndex = 0;
@@ -100,7 +54,6 @@ class _HomeState extends State<Home> {
       // const Page1(),
       // const Page2(),
       // const Page3(),
-      // const Page4(),
     ];
 
     Container buildMyNavBar(BuildContext context) {
@@ -116,61 +69,64 @@ class _HomeState extends State<Home> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            IconButton(
+            InkWell(
               enableFeedback: false,
-              onPressed: () {
+              onTap: () {
                 setState(() {
                   pageIndex = 0;
                 });
               },
-              icon: pageIndex == 0
-                  ? const Icon(
-                Icons.home_filled,
-                color: primaryColor,
-                size: 35,
-              )
-                  : const Icon(
-                Icons.home_outlined,
-                color: primaryColor,
-                size: 35,
+              child:
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.person,
+                    color: pageIndex == 0? primaryColor :Color(0x536D407D),
+                    size: 35,
+                  ),
+                  CmText(text: "My\n Moments",color: pageIndex == 0? primaryColor :Color(0x536D407D),fontSize: 12,align: TextAlign.center,)
+                ],
               ),
             ),
-            IconButton(
+            InkWell(
               enableFeedback: false,
-              onPressed: () {
+              onTap: () {
                 setState(() {
                   pageIndex = 1;
                 });
               },
-              icon: pageIndex == 1
-                  ? const Icon(
-                Icons.work_rounded,
-                color: primaryColor,
-                size: 35,
-              )
-                  : const Icon(
-                Icons.work_outline_outlined,
-                color: primaryColor,
-                size: 35,
+              child:
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.people,
+                    color: pageIndex == 1? primaryColor :Color(0x536D407D),
+                    size: 35,
+                  ),
+                  CmText(text: "People\n Moments",color: pageIndex == 1? primaryColor :Color(0x536D407D),fontSize: 12,align: TextAlign.center,)
+                ],
               ),
             ),
-            IconButton(
+            InkWell(
               enableFeedback: false,
-              onPressed: () {
+              onTap: () {
                 setState(() {
                   pageIndex = 2;
                 });
               },
-              icon: pageIndex == 2
-                  ? const Icon(
-                Icons.widgets_rounded,
-                color: primaryColor,
-                size: 35,
-              )
-                  : const Icon(
-                Icons.widgets_outlined,
-                color: primaryColor,
-                size: 35,
+              child:
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.inbox,
+                    color: pageIndex == 2? primaryColor :Color(0x536D407D),
+                    size: 35,
+                  ),
+                  CmText(text: "Inbox",color: pageIndex == 2? primaryColor :Color(0x536D407D),fontSize: 12,align: TextAlign.center,)
+                ],
               ),
             ),
           ],
@@ -178,17 +134,41 @@ class _HomeState extends State<Home> {
       );
     }
 
+    generateOneWeekForward () {
+
+      var monthFormatter = new DateFormat('MMMM');
+      var yearFormatter = new DateFormat('yyyy');
+      month = monthFormatter.format(now);
+      year = yearFormatter.format(now);
+
+      var fullDateFormatter = new DateFormat('EEEE MMMM dd, y');
+      var dayNameFormatter = new DateFormat('EEEE');
+      var dateFormatter = new DateFormat('dd');
+      for(int i=0;i<7;i++){
+        final nextDay = DateTime(now.year, now.month, now.day + i);
+        days.add( {
+          "dayName": i==0 ? "Today" :dayNameFormatter.format(nextDay),
+          "date":dateFormatter.format(nextDay),
+          "fullDate":fullDateFormatter.format(nextDay)},);
+      }
+      selectedDay = days[0]["fullDate"];
+    }
+
+    @override
+    void initState() {
+      generateOneWeekForward();
+      super.initState();
+    }
+
 
   @override
   Widget build(BuildContext context) {
-
-
     return MMScaffold(
         appBar: MMAppBar(
           leading:     InkWell(
             onTap: (){
-              Get.to(()=> const
-              Profile());
+              // Get.to(()=> const
+              // Profile());
             },
             child: CmContainer(
                 child: Image.asset("assets/images/profile.png")),
@@ -207,7 +187,7 @@ class _HomeState extends State<Home> {
                 color: Color(0xFFF2F2F2),
               ),
               child:  IconButton(onPressed: (){
-                Get.to(()=> const Search());
+                // Get.to(()=> const Search());
               }, icon: const Icon(Icons.search,size: 16,color: Color(0x3C3C434D),),),
             ),
           ],
@@ -220,9 +200,9 @@ class _HomeState extends State<Home> {
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  MMMdContainer(text: "September"),
-                  MMMdContainer(text: "2021")
+                children:  [
+                  MMMdContainer(text: month),
+                  MMMdContainer(text: year)
                 ],
               ),
               SizedBox(
@@ -253,8 +233,8 @@ class _HomeState extends State<Home> {
               SizedBox(
                 height: heightAccordingRation(context,16),
               ),
-              const CmText(
-                text: "Sunday March 8, 2021",
+               CmText(
+                text: selectedDay,
                 color: Color(0xFF613659),
                 fontWeight: FontWeight.bold,
                 fontSize: 24,
@@ -271,6 +251,7 @@ class _HomeState extends State<Home> {
                         onTap: (){
                         setState(() {
                           selectedType=i;
+                          selectedTypeName = categories[i];
                         });
                         },
                         color: selectedType==i ? Colors.white : Colors.grey,
@@ -284,17 +265,17 @@ class _HomeState extends State<Home> {
               ListView.builder(
                   shrinkWrap: true,
                   physics: const BouncingScrollPhysics(),
-                  itemCount: moments.length,
+                  itemCount: moments[selectedTypeName].length,
                   itemBuilder: (context, i) {
-                    return moments[i]["isAvailable"]?
-                    MMAvailableMoment(time: moments[i]["time"]):
+                    return moments[selectedTypeName][i]["isAvailable"]?
+                    MMAvailableMoment(time: moments[selectedTypeName][i]["time"]):
                     MMTakenMoment(
-                      username: moments[i]["moment"]["username"],
-                      momentName: moments[i]["moment"]["momentName"],
-                      type: moments[i]["moment"]["type"],
-                      time: moments[i]["time"],
-                      location: moments[i]["moment"]["location"],
-                      people: moments[i]["moment"]["people"],
+                      username: moments[selectedTypeName][i]["moment"]["username"],
+                      momentName: moments[selectedTypeName][i]["moment"]["momentName"],
+                      type: moments[selectedTypeName][i]["moment"]["type"],
+                      time: moments[selectedTypeName][i]["time"],
+                      location: moments[selectedTypeName][i]["moment"]["location"],
+                      people: moments[selectedTypeName][i]["moment"]["people"],
                     );
                   }),
             ],

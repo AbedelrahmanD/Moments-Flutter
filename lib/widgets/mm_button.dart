@@ -13,10 +13,10 @@ class MMButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CmButton(
-
       backgroundColor: color,
       onPressed: onPressed,
       width: width,
+      // borderColor: Colors.white,
       child: CmText(text: text,color: textColor,fontSize: 20,fontWeight: FontWeight.bold,),
     );
   }

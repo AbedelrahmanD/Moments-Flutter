@@ -2,6 +2,7 @@
 import 'package:country_pickers/country.dart';
 import 'package:country_pickers/country_picker_dialog.dart';
 import 'package:country_pickers/utils/utils.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:moment/helpers/config.dart';
 import 'package:moment/helpers/widgets/cm_container.dart';
@@ -26,7 +27,7 @@ class _LoginMobileState extends State<LoginMobile> {
   TextEditingController mobileController = TextEditingController();
 
   Country _selectedDialogCountry =
-  CountryPickerUtils.getCountryByPhoneCode('961');
+  CountryPickerUtils.getCountryByPhoneCode('966');
 
 
   void _openCountryPickerDialog() => showDialog(
@@ -56,10 +57,14 @@ class _LoginMobileState extends State<LoginMobile> {
       Row(
     children: <Widget>[
       CountryPickerUtils.getDefaultFlagImage(country),
-      const SizedBox(width: 8.0),
-      Text("+${country.phoneCode}"),
-      const SizedBox(width: 8.0),
-      Flexible(child: Text(country.name))
+      Flexible(fit: FlexFit.loose  ,child: const SizedBox(width: 8.0)),
+      Text("+${country.phoneCode}",overflow: TextOverflow.fade),
+      Flexible(fit: FlexFit.loose,child: const SizedBox(width: 8.0)),
+      Flexible(
+        fit: FlexFit.tight,
+        flex: 3,
+        child: Text(country.name),
+      )
     ],
   );
 
@@ -107,6 +112,7 @@ class _LoginMobileState extends State<LoginMobile> {
                       ),
                     ),
                     MMTextField(
+                      keyboardType: TextInputType.number,
                       controller: mobileController,
                       width: widthAccordingRation(context,219),
                       text: "Mobile Number",

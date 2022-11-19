@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:moment/helpers/widgets/cm_container.dart';
 import 'package:moment/helpers/widgets/cm_text.dart';
 import 'package:moment/utils/constants.dart';
@@ -59,13 +58,11 @@ class MMTakenMoment extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SvgPicture.asset(
-                'assets/images/wallClock.svg',
-                height: 12.0,
+              CmContainer(
                 width: 12.0,
-                allowDrawingOutsideViewBox: true,
-              ),
-              const SizedBox(width: 4,),
+                height: 12.0,
+                child: Image.asset("assets/images/wallClock.png"),),
+              const SizedBox(width: 8,),
               CmText(text: time,fontSize: 16,)
             ],
           ),
@@ -73,12 +70,10 @@ class MMTakenMoment extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SvgPicture.asset(
-                'assets/images/pin.svg',
-                height: 12.0,
+              CmContainer(
                 width: 12.0,
-                allowDrawingOutsideViewBox: true,
-              ),
+                height: 12.0,
+                child: Image.asset("assets/images/pin.png"),),
               const SizedBox(width: 8,),
               CmText(text: location,fontSize: 12,decoration: TextDecoration.underline,)
             ],
@@ -87,13 +82,11 @@ class MMTakenMoment extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SvgPicture.asset(
-                'assets/images/people.svg',
-                height: 12.0,
+              CmContainer(
                 width: 12.0,
-                allowDrawingOutsideViewBox: true,
-              ),
-              const SizedBox(width: 4,),
+                height: 12.0,
+                child: Image.asset("assets/images/people.png"),),
+              const SizedBox(width: 8,),
               CmText(text: people,fontSize: 12,decoration:TextDecoration.underline)
             ],
           ),

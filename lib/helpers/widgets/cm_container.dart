@@ -145,7 +145,7 @@ class CmContainer extends StatelessWidget {
               paddingBottom),
           decoration: BoxDecoration(
             color: color,
-            shape: boxShape,
+
             border: Border(
               left: BorderSide(
                 color: borderStart > 0 ? borderColor : Colors.transparent,

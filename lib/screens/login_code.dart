@@ -44,6 +44,7 @@ class LoginCodeState extends State<LoginCode> {
                   height: heightAccordingRation(context,48),
                 ),
                 MMTextField(
+                  keyboardType: TextInputType.number,
                   onChanged: (value){
                     setState(() {
 

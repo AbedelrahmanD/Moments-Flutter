@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+
 import 'package:moment/helpers/config.dart';
 import 'package:moment/helpers/widgets/cm_button.dart';
 import 'package:moment/helpers/widgets/cm_container.dart';
@@ -145,12 +145,10 @@ class _InboxState extends State<Inbox> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        SvgPicture.asset(
-                          'assets/images/pin.svg',
-                          height: 14.0,
+                        CmContainer(
                           width: 14.0,
-                          allowDrawingOutsideViewBox: true,
-                        ),
+                          height: 14.0,
+                          child: Image.asset("assets/images/pin.png"),),
                         const SizedBox(
                           width: 8,
                         ),
@@ -167,12 +165,10 @@ class _InboxState extends State<Inbox> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        SvgPicture.asset(
-                          'assets/images/pin.svg',
-                          height: 14.0,
+                        CmContainer(
                           width: 14.0,
-                          allowDrawingOutsideViewBox: true,
-                        ),
+                          height: 14.0,
+                          child: Image.asset("assets/images/pin.png"),),
                         const SizedBox(
                           width: 8,
                         ),
@@ -184,12 +180,10 @@ class _InboxState extends State<Inbox> {
                             child: SizedBox(
                           width: 5,
                         )),
-                        SvgPicture.asset(
-                          'assets/images/wallClock.svg',
-                          height: 14.0,
+                        CmContainer(
                           width: 14.0,
-                          allowDrawingOutsideViewBox: true,
-                        ),
+                          height: 14.0,
+                          child: Image.asset("assets/images/wallClock.png"),),
                         const SizedBox(
                           width: 8,
                         ),

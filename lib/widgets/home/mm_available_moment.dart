@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:moment/helpers/widgets/cm_container.dart';
 import 'package:moment/helpers/widgets/cm_text.dart';
@@ -16,12 +15,12 @@ class MMAvailableMoment extends StatelessWidget {
       marginBottom: 16,
       child: InkWell(
         onTap: (){
-          Get.to(()=> const CreateMoment());
+          // Get.to(()=> const CreateMoment());
         },
         child: CmContainer(
           width: width(context),
           height: 88,
-          color: const Color(0xFFDEDEDE),
+          color:  Colors.white.withOpacity(0.7),
           paddingBottom: heightAccordingRation(context, 15),
           paddingTop: heightAccordingRation(context, 15),
           paddingEnd: 16,
@@ -35,12 +34,10 @@ class MMAvailableMoment extends StatelessWidget {
               SizedBox(height: heightAccordingRation(context, 4),),
               Row(
                 children:  [
-                  SvgPicture.asset(
-                    'assets/images/addButton.svg',
-                    height: 20.0,
-                    width: 20.0,
-                    allowDrawingOutsideViewBox: true,
-                  ),
+                  CmContainer(
+                      width: 20.0,
+                      height: 20.0,
+                      child: Image.asset("assets/images/addButton.png"),),
                   const CmText(text: " Available",fontSize: 24,),
                 ],
               )

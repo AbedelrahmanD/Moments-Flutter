@@ -14,15 +14,16 @@ class MMTextField extends StatelessWidget {
   final bool autofocus;
   final TextEditingController controller;
   final Function(String)? onChanged;
+  final TextInputType keyboardType ;
    Color? actionBackgroundColor;
   final Function()? onSuffixIconTap;
 
-   MMTextField({Key? key, this.text = "",required this.controller,this.onChanged,this.onSuffixIconTap,this.actionText,this.actionColor=Colors.white,this.actionBackgroundColor, required this.width, this.autofocus = false}) : super(key: key);
+   MMTextField({Key? key, this.text = "",required this.controller,this.onChanged,this.onSuffixIconTap,this.actionText,this.actionColor=Colors.white,this.actionBackgroundColor, required this.width, this.autofocus = false, this.keyboardType =TextInputType.text}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CmTextField(
-
+      keyboardType: keyboardType,
       autofocus: autofocus,
       controller: controller,
       marginTop: 0,
