@@ -15,7 +15,7 @@ class MMAvailableMoment extends StatelessWidget {
       marginBottom: 16,
       child: InkWell(
         onTap: (){
-          // Get.to(()=> const CreateMoment());
+          Get.to(()=> const CreateMoment());
         },
         child: CmContainer(
           width: width(context),

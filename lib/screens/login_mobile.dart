@@ -52,6 +52,15 @@ class _LoginMobileState extends State<LoginMobile> {
     ),
   );
 
+  Widget _buildDialogItemText(Country country) =>
+      Row(
+        children: <Widget>[
+          CountryPickerUtils.getDefaultFlagImage(country),
+          Flexible(fit: FlexFit.loose,child: const SizedBox(width: 8.0)),
+          Text("+${country.phoneCode}",overflow: TextOverflow.fade),
+          Flexible(fit: FlexFit.loose,child: const SizedBox(width: 8.0)),
+        ],
+      );
 
   Widget _buildDialogItem(Country country) =>
       Row(
@@ -107,7 +116,7 @@ class _LoginMobileState extends State<LoginMobile> {
                         onTap: _openCountryPickerDialog,
                         child: Padding(
                           padding: const EdgeInsets.all(14),
-                          child: _buildDialogItem(_selectedDialogCountry),
+                          child: _buildDialogItemText(_selectedDialogCountry),
                         ),
                       ),
                     ),

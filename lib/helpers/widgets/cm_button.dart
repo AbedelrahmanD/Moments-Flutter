@@ -45,7 +45,6 @@ class CmButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CmContainer(
-      color: Colors.redAccent,
       boxShadowColor: boxShadowColor,
       spreadRadius: spreadRadius,
         blurRadius: blurRadius,

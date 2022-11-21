@@ -167,8 +167,8 @@ class _HomeState extends State<Home> {
         appBar: MMAppBar(
           leading:     InkWell(
             onTap: (){
-              // Get.to(()=> const
-              // Profile());
+              Get.to(()=> const
+              Profile());
             },
             child: CmContainer(
                 child: Image.asset("assets/images/profile.png")),
@@ -187,7 +187,7 @@ class _HomeState extends State<Home> {
                 color: Color(0xFFF2F2F2),
               ),
               child:  IconButton(onPressed: (){
-                // Get.to(()=> const Search());
+                Get.to(()=> const Search());
               }, icon: const Icon(Icons.search,size: 16,color: Color(0x3C3C434D),),),
             ),
           ],
@@ -235,6 +235,7 @@ class _HomeState extends State<Home> {
               ),
                CmText(
                 text: selectedDay,
+                isFitted: true,
                 color: Color(0xFF613659),
                 fontWeight: FontWeight.bold,
                 fontSize: 24,

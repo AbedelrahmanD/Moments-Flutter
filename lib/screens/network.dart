@@ -49,6 +49,7 @@ class _NetworkState extends State<Network> {
         appBar: MMAppBar(
           title: "Network",
           appBarExtends: CmTextField(
+            width: widthAccordingRation(context, 341),
             borderColor: const Color(0xFFF2F2F2),
             hintText: "Search Your Connections",
             suffixWidget: CmContainer(
@@ -103,52 +104,60 @@ class _NetworkState extends State<Network> {
             Expanded(
               child: CmContainer(
                   color: Colors.white,
-                  borderRadiusAll: 16,
+                  borderRadiusTopEnd: 16,
+                  borderRadiusTopStart: 16,
                   width: widthAccordingRation(context, 341),
-                  height: heightAccordingRation(context, 531),
                   child: ListView.builder(
                   physics: const BouncingScrollPhysics(),
                     itemCount: users.length,
                     itemBuilder: (context, i) {
-                      return CmContainer(
-                        paddingAll: 15,
-                        borderWidthBottom: 1,
-                        borderColor: const Color(0xffDFD8D0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Row(
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          CmContainer(
+                            paddingAll: 15,
+                            borderColor: const Color(0xffDFD8D0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                CmContainer(
-                                    width: widthAccordingRation(context, 32),
-                                    height:
-                                        heightAccordingRation(context, 32),
-                                    child: Image.asset(
-                                        "assets/images/${users[i]["image"]}")),
-                                SizedBox(
-                                  width: widthAccordingRation(context, 8),
+                                Row(
+                                  children: [
+                                    CmContainer(
+                                        width: widthAccordingRation(context, 32),
+                                        height:
+                                            heightAccordingRation(context, 32),
+                                        child: Image.asset(
+                                            "assets/images/${users[i]["image"]}")),
+                                    SizedBox(
+                                      width: widthAccordingRation(context, 8),
+                                    ),
+                                    CmText(
+                                      text: users[i]["name"],
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ],
                                 ),
-                                CmText(
-                                  text: users[i]["name"],
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                CmButton(
+                                    width: widthAccordingRation(context, 86),
+                                    height: heightAccordingRation(context, 29),
+                                    backgroundColor: Colors.white,
+                                    borderColor: const Color(0xffA761C4),
+                                    borderWidth: 1,
+                                    padding: 0,
+                                    borderRadius: 100,
+                                    child: const CmText(
+                                      text: "Remove",
+                                      fontSize: 17,
+                                      color: Color(0xffA761C4),
+                                    ))
                               ],
                             ),
-                            CmButton(
-                                width: widthAccordingRation(context, 86),
-                                height: heightAccordingRation(context, 29),
-                                backgroundColor: Colors.white,
-                                borderColor: const Color(0xffA761C4),
-                                borderWidth: 1,
-                                padding: 0,
-                                borderRadius: 100,
-                                child: const CmText(
-                                  text: "Remove",
-                                  fontSize: 17,
-                                  color: Color(0xffA761C4),
-                                ))
-                          ],
-                        ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                            child: Divider( thickness: 1,height: 1,color: Color(0xFFF2F2F2)),
+                          ),
+                        ],
                       );
                     },
                   )),

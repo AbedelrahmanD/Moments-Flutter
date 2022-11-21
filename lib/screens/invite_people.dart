@@ -5,6 +5,7 @@ import 'package:moment/helpers/widgets/cm_container.dart';
 import 'package:moment/helpers/widgets/cm_text.dart';
 import 'package:moment/helpers/widgets/cm_text_field.dart';
 import 'package:moment/utils/constants.dart';
+import 'package:moment/widgets/alert_box.dart';
 import 'package:moment/widgets/mm_app_bar.dart';
 import 'package:moment/widgets/mm_scaffold.dart';
 
@@ -16,25 +17,105 @@ class InvitePeople extends StatefulWidget {
 }
 
 class InvitePeopleState extends State<InvitePeople> {
-
   List users = [
-    {"image": "profile.png", "name": "Ahmad Mohamed"},
-    {"image": "profile.png", "name": "Ahmad Mohamed"},
-    {"image": "profile.png", "name": "Ahmad Mohamed"},
-    {"image": "profile.png", "name": "Ahmad Mohamed"},
-    {"image": "profile.png", "name": "Ahmad Mohamed"},
-    {"image": "profile.png", "name": "Ahmad Mohamed"},
-    {"image": "profile.png", "name": "Ahmad Mohamed"},
-    {"image": "profile.png", "name": "Ahmad Mohamed"},
-    {"image": "profile.png", "name": "Ahmad Mohamed"},
-    {"image": "profile.png", "name": "Ahmad Mohamed"},
-    {"image": "profile.png", "name": "Ahmad Mohamed"},
-    {"image": "profile.png", "name": "Ahmad Mohamed"},
-    {"image": "profile.png", "name": "Ahmad Mohamed"},
-    {"image": "profile.png", "name": "Ahmad Mohamed"},
-    {"image": "profile.png", "name": "Ahmad Mohamed"},
-    {"image": "profile.png", "name": "Ahmad zzzzzzzzzzz"}
+    {
+      "image": "profile.png",
+      "name": "Ahmad Mohamed",
+      "available": true,
+      "value": false
+    },
+    {
+      "image": "profile.png",
+      "name": "Ahmad Mohamed",
+      "available": true,
+      "value": false
+    },
+    {
+      "image": "profile.png",
+      "name": "Ahmad Mohamed",
+      "available": true,
+      "value": false
+    },
+    {
+      "image": "profile.png",
+      "name": "Ahmad Mohamed",
+      "available": true,
+      "value": false
+    },
+    {
+      "image": "profile.png",
+      "name": "Ahmad Mohamed",
+      "available": false,
+      "value": false
+    },
+    {
+      "image": "profile.png",
+      "name": "Ahmad Mohamed",
+      "available": false,
+      "value": false
+    },
+    {
+      "image": "profile.png",
+      "name": "Ahmad Mohamed",
+      "available": false,
+      "value": false
+    },
+    {
+      "image": "profile.png",
+      "name": "Ahmad Mohamed",
+      "available": false,
+      "value": false
+    },
+    {
+      "image": "profile.png",
+      "name": "Ahmad Mohamed",
+      "available": false,
+      "value": false
+    },
+    {
+      "image": "profile.png",
+      "name": "Ahmad Mohamed",
+      "available": true,
+      "value": false
+    },
+    {
+      "image": "profile.png",
+      "name": "Ahmad Mohamed",
+      "available": true,
+      "value": false
+    },
+    {
+      "image": "profile.png",
+      "name": "Ahmad Mohamed",
+      "available": true,
+      "value": false
+    },
+    {
+      "image": "profile.png",
+      "name": "Ahmad Mohamed",
+      "available": true,
+      "value": false
+    },
+    {
+      "image": "profile.png",
+      "name": "Ahmad Mohamed",
+      "available": true,
+      "value": false
+    },
+    {
+      "image": "profile.png",
+      "name": "Ahmad Mohamed",
+      "available": true,
+      "value": false
+    },
+    {
+      "image": "profile.png",
+      "name": "Ahmad zzzzzzzzzzz",
+      "available": true,
+      "value": false
+    }
   ];
+
   @override
   Widget build(BuildContext context) {
     return MMScaffold(
@@ -42,6 +123,7 @@ class InvitePeopleState extends State<InvitePeople> {
         appBar: MMAppBar(
           title: "Add people",
           appBarExtends: CmTextField(
+            width: widthAccordingRation(context, 341),
             borderColor: const Color(0xFFF2F2F2),
             hintText: "Name or Mobile Number",
             suffixWidget: CmContainer(
@@ -68,57 +150,117 @@ class InvitePeopleState extends State<InvitePeople> {
             Expanded(
               child: CmContainer(
                   color: Colors.white,
-                  borderRadiusAll: 16,
+                  borderRadiusTopEnd: 16,
+                  borderRadiusTopStart: 16,
                   width: widthAccordingRation(context, 341),
-                  height: heightAccordingRation(context, 531),
                   child: ListView.builder(
                     physics: const BouncingScrollPhysics(),
                     itemCount: users.length,
                     itemBuilder: (context, i) {
-                      return CmContainer(
-                        paddingAll: 15,
-                        borderWidthBottom: 1,
-                        borderColor: const Color(0xffDFD8D0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Row(
+                      return Column(
+                        children: [
+                          CheckboxListTile(
+
+                            checkboxShape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(12))),
+                            value: users[i]["value"],
+                            onChanged: (bool? value) {
+                              setState(() {
+                                users[i]["value"] = value;
+                              });
+                            },
+                            secondary: CmContainer(
+                                width: widthAccordingRation(context, 32),
+                                height: heightAccordingRation(context, 32),
+                                child: Image.asset(
+                                    "assets/images/${users[i]["image"]}")),
+                            title: CmText(
+                              text: users[i]["name"],
+                              fontSize: 17,
+                            ),
+                            subtitle: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                CmContainer(
-                                    width: widthAccordingRation(context, 32),
-                                    height:
-                                    heightAccordingRation(context, 32),
-                                    child: Image.asset(
-                                        "assets/images/${users[i]["image"]}")),
+                                Icon(
+                                  Icons.circle,
+                                  size: 12,
+                                  color: users[i]["available"]
+                                      ? primaryColor
+                                      : Color(0xFFDFD8D0),
+                                ),
                                 SizedBox(
-                                  width: widthAccordingRation(context, 8),
+                                  width: 4,
                                 ),
                                 CmText(
-                                  text: users[i]["name"],
-                                  fontWeight: FontWeight.bold,
+                                  text: users[i]["available"]
+                                      ? "Available"
+                                      : "Not Available",
+                                  fontSize: 12,
                                 ),
                               ],
                             ),
-                            CmButton(
-                                width: widthAccordingRation(context, 86),
-                                height: heightAccordingRation(context, 29),
-                                backgroundColor: Colors.white,
-                                borderColor: const Color(0xffA761C4),
-                                borderWidth: 1,
-                                padding: 0,
-                                borderRadius: 100,
-                                child: const CmText(
-                                  text: "Remove",
-                                  fontSize: 17,
-                                  color: Color(0xffA761C4),
-                                ))
-                          ],
-                        ),
+                            side: BorderSide(
+                                color: Color(0xFFC7C7CC), style: BorderStyle.solid),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                            child: Divider( thickness: 1,height: 1,color: Color(0xFFF2F2F2)),
+                          ),
+                        ],
                       );
                     },
-                  )),
-            )
+                  ),
+              ),
+            ),
           ],
-        ));
+        ),
+      bottomNavigationBar: buildMyNavBar(context),
+    );
+  }
+  Widget buildMyNavBar(BuildContext context) {
+    return CmContainer(
+      height: 80,
+      color: Colors.white,
+      borderRadiusTopStart: 16,
+      borderRadiusTopEnd: 16,
+      borderColor: Color(0xFFDFD8D0),
+      borderWidthAll: 1,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          CmButton(
+            padding: 0,
+            marginBottom: 0,
+            marginTop: 0,
+            height: 48,
+            width: widthAccordingRation(context, 164),
+            child: CmText(
+              text: "Invite",
+              color: Colors.white,
+              fontSize: 24,
+            ),
+          ), 
+          CmButton(
+            onPressed: (){
+              showAlertCheckAvailableDate(buttonWidth: width(context,value: 0.35));
+            },
+            backgroundColor: Colors.white,
+            padding: 0,
+            marginBottom: 0,
+            marginTop: 0,
+            height: 48,
+            width: widthAccordingRation(context, 164),
+            borderColor: primaryColor,
+            child: CmText(
+              text: "Check \n Availability",
+              color: primaryColor,
+              fontSize: 18,
+              align: TextAlign.center,
+            ),
+          )
+        ],
+      ),
+    );
   }
 }

@@ -112,6 +112,7 @@ class _InboxState extends State<Inbox> {
                 paddingEnd: 19,
                 borderRadiusAll: 16,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -150,7 +151,7 @@ class _InboxState extends State<Inbox> {
                           height: 14.0,
                           child: Image.asset("assets/images/pin.png"),),
                         const SizedBox(
-                          width: 8,
+                          width: 4,
                         ),
                         CmText(
                           text: inboxes[i]["location"],
@@ -162,35 +163,37 @@ class _InboxState extends State<Inbox> {
                     const SizedBox(
                       height: 7,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                    Wrap(
+                      crossAxisAlignment: WrapCrossAlignment.start,
+                      direction:Axis.horizontal,
                       children: [
-                        CmContainer(
-                          width: 14.0,
-                          height: 14.0,
-                          child: Image.asset("assets/images/pin.png"),),
-                        const SizedBox(
-                          width: 8,
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            CmContainer(
+                              width: 14.0,
+                              height: 14.0,
+                              child: Image.asset("assets/images/pin.png"),),
+                            SizedBox(width: 4,),
+                            CmText(
+                              text: inboxes[i]["date"],
+                              fontSize: 16,
+                            ),
+                          ],
                         ),
-                        CmText(
-                          text: inboxes[i]["date"],
-                          fontSize: 16,
-                        ),
-                        const Expanded(
-                            child: SizedBox(
-                          width: 5,
-                        )),
-                        CmContainer(
-                          width: 14.0,
-                          height: 14.0,
-                          child: Image.asset("assets/images/wallClock.png"),),
-                        const SizedBox(
-                          width: 8,
-                        ),
-                        CmText(
-                          text: inboxes[i]["time"],
-                          fontSize: 16,
-                        ),
+
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [CmContainer(
+                            width: 14.0,
+                            height: 14.0,
+                            child: Image.asset("assets/images/wallClock.png"),),
+                            SizedBox(width: 4,),
+                            CmText(
+                              text: inboxes[i]["time"],
+                              fontSize: 16,
+                            ),],
+                        )
                       ],
                     ),
                     const SizedBox(
