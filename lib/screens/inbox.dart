@@ -104,7 +104,7 @@ class _InboxState extends State<Inbox> {
           itemCount: inboxes.length,
           itemBuilder: (context, i) {
             return CmContainer(
-                marginTop: 8,
+                marginTop: i==0? 0:8,
                 marginBottom: 8,
                 color: Colors.white,
                 paddingTop: 25,
@@ -127,12 +127,12 @@ class _InboxState extends State<Inbox> {
                           child: RichText(
                               text: TextSpan(
                             text: inboxes[i]["name"]+" ",
-                            style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black),
+                            style: TextStyle(fontWeight: FontWeight.bold,color: Colors.black,fontSize: 17),
                             children: [
 
                               TextSpan(
                                 text:  inboxes[i]["message"],
-                                style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal),
+                                style: TextStyle(color: Colors.black,fontWeight: FontWeight.normal,fontSize: 17),
                               )
                             ]
                           )),
@@ -166,6 +166,7 @@ class _InboxState extends State<Inbox> {
                     Wrap(
                       crossAxisAlignment: WrapCrossAlignment.start,
                       direction:Axis.horizontal,
+                      spacing: 2,
                       children: [
                         Row(
                           mainAxisSize: MainAxisSize.min,

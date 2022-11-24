@@ -128,8 +128,10 @@ class InvitePeopleState extends State<InvitePeople> {
             hintText: "Name or Mobile Number",
             suffixWidget: CmContainer(
               width: widthAccordingRation(context, 81),
-              height: 29,
-              paddingAll: 7,
+              height: 19,
+              paddingBottom: 10,
+              paddingTop: 10,
+              marginEnd: 16,
               child: CmContainer(
                 borderRadiusAll: 16,
                 color: primaryColor,
@@ -243,7 +245,7 @@ class InvitePeopleState extends State<InvitePeople> {
           ), 
           CmButton(
             onPressed: (){
-              showAlertCheckAvailableDate(buttonWidth: width(context,value: 0.35));
+              showAlertCheckAvailableDate(buttonWidth: width(context,value: 0.3));
             },
             backgroundColor: Colors.white,
             padding: 0,

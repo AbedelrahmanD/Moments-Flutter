@@ -150,7 +150,6 @@ class _CmTextFieldState extends State<CmTextField> {
       marginTop: widget.marginTop,
       marginBottom: widget.marginBottom,
       child: TextField(
-
         textInputAction: widget.textInputAction,
         scrollPadding:EdgeInsets.only(bottom: widget.scrollPadding) ,
         autofocus: widget.autofocus,

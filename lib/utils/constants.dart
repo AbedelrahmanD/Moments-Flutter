@@ -1,5 +1,7 @@
 
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 
@@ -447,7 +449,27 @@ dynamic isAvailableArray = [
 
 ];
 
+List networkNames = [
+  "Ahmad Mohamed",
+  "Mahmoud Sobhy",
+  "Mostafa Hussein",
+  "Osama Hassan",
+  "Hanan Ezz",
+  "Salma Mostafa",
+  "Salma Mostafa",
+  "Salma Mostafa",
+  "Jihan Shaker",
+  "Esslam Mohsen"
+];
 
+List momentsName = [
+  "Watch a movie",
+  "Read a book",
+  "Watch a match",
+  "Business Meeting",
+];
+
+final random = new Random();
 
 dynamic moments =
 {
@@ -457,7 +479,7 @@ dynamic moments =
         "time":"00:00 - 01:30",
         "isAvailable": isAvailableArray[i][0],
         "moment": {"username":"Dr. Zaidan Alenezi",
-          "momentName":"Watch the match",
+          "momentName":momentsName[random.nextInt(momentsName.length)],
           "type":"${categories[i]}",
           "location":"VOX Cinema - Red Sea Mall",
           "people":"12 People"}

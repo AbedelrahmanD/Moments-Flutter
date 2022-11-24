@@ -1,8 +1,6 @@
-
 import 'package:country_pickers/country.dart';
 import 'package:country_pickers/country_picker_dialog.dart';
 import 'package:country_pickers/utils/utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:moment/helpers/config.dart';
 import 'package:moment/helpers/widgets/cm_container.dart';
@@ -29,19 +27,102 @@ class _LoginMobileState extends State<LoginMobile> {
   Country _selectedDialogCountry =
   CountryPickerUtils.getCountryByPhoneCode('966');
 
+  // late List<Country> _allCountries;
+  //
+  // late List<Country> _filteredCountries;
+  //
+  // List<Country> priorityList = [CountryPickerUtils.getCountryByPhoneCode('966'),CountryPickerUtils.getCountryByPhoneCode('961')];
+  //
+  // @override
+  // void initState() {
+  //   _allCountries =
+  //       countryList.where( acceptAllCountries).toList();
+  //
+  //
+  //
+  //
+  //     priorityList.forEach((Country country) => _allCountries
+  //         .removeWhere((Country c) => country.isoCode == c.isoCode));
+  //     _allCountries.insertAll(0, priorityList);
+  //
+  //   _filteredCountries = _allCountries;
+  //   print(_filteredCountries);
+  //
+  //   super.initState();
+  // }
 
   void _openCountryPickerDialog() => showDialog(
+
     context: context,
+    barrierDismissible: true,
+    // builder: (context) =>
+        // AlertDialog(
+        //   insetPadding: EdgeInsets.all(20.0),
+        //   title: Text(
+        //     "Select you phone code",
+        //     textAlign: TextAlign.center,
+        //   ),
+        //   content: Container(
+        //     width: MediaQuery.of(context).size.width,
+        //     child: SingleChildScrollView(
+        //       child: Column(
+        //         children: [
+        //           ListView(
+        //             shrinkWrap: true,
+        //             children: _filteredCountries
+        //                 .map((item) => _buildDialogItem(item))
+        //                 .toList()
+        //           ),
+                  // ListView.builder(
+                  //     itemCount: _filteredCountries.length,
+                  //     shrinkWrap: true,
+                  //     physics: const BouncingScrollPhysics(),
+                  //     itemBuilder:
+                  //         (BuildContext context, int i) {
+                  //       return _buildDialogItem(_filteredCountries[i]);
+                  //     })
+        //         ],
+        //       ),
+        //     ),
+        //   ),
+        // ),
+    //     Material(
+    //   color: Colors.transparent,
+    //
+    //   child: Center(
+    //     child: Container(
+    //       padding: EdgeInsets.all(16),
+    //       decoration: BoxDecoration(
+    //         color: Colors.white,
+    //         borderRadius:  BorderRadius.all(Radius.circular(16)),
+    //       ),
+    //       width: width(context,value: 0.4), // Dialog width
+    //       height: height(context, value: 0.9), // Dialog height
+    //       child: SingleChildScrollView(
+    //         child: Column(
+    //           children: [
+    //             Text('I am a small Dialog'),
+    //           ],
+    //         ),
+    //       ),
+    //     ),
+    //   ),
+    // ),
+    //////////////////////////////////////////////////////
     builder: (context) => Theme(
-      data: Theme.of(context).copyWith(primaryColor: Colors.pink),
-      child: CountryPickerDialog(
+      data: Theme.of(context).copyWith(primaryColor: primaryColor),
+      child:
+      CountryPickerDialog(
         titlePadding: const EdgeInsets.all(8.0),
         searchCursorColor: primaryColor,
         searchInputDecoration: const InputDecoration(hintText: 'Search...'),
         isSearchable: true,
+
         title: const Text('Select your phone code'),
         onValuePicked: (Country country) =>
-            setState(() => _selectedDialogCountry = country),
+            setState(
+                    () {
+                      _selectedDialogCountry = country;}),
         itemBuilder: _buildDialogItem,
 
         priorityList: [
@@ -63,19 +144,19 @@ class _LoginMobileState extends State<LoginMobile> {
       );
 
   Widget _buildDialogItem(Country country) =>
-      Row(
+      Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: Row(
+          mainAxisSize: MainAxisSize.max,
     children: <Widget>[
-      CountryPickerUtils.getDefaultFlagImage(country),
-      Flexible(fit: FlexFit.loose  ,child: const SizedBox(width: 8.0)),
-      Text("+${country.phoneCode}",overflow: TextOverflow.fade),
-      Flexible(fit: FlexFit.loose,child: const SizedBox(width: 8.0)),
-      Flexible(
-        fit: FlexFit.tight,
-        flex: 3,
-        child: Text(country.name),
-      )
+        CountryPickerUtils.getDefaultFlagImage(country),
+        const SizedBox(width: 8.0),
+        Text("+${country.phoneCode}"),
+        const SizedBox(width: 8.0),
+      Expanded(child: Text(country.name,overflow: TextOverflow.clip,maxLines: 2,))
     ],
-  );
+  ),
+      );
 
 
   @override

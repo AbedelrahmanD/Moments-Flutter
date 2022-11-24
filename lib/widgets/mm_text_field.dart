@@ -17,12 +17,18 @@ class MMTextField extends StatelessWidget {
   final TextInputType keyboardType ;
    Color? actionBackgroundColor;
   final Function()? onSuffixIconTap;
+  final Color inputColor;
+  final Function()? onTap;
+  final bool readOnly;
 
-   MMTextField({Key? key, this.text = "",required this.controller,this.onChanged,this.onSuffixIconTap,this.actionText,this.actionColor=Colors.white,this.actionBackgroundColor, required this.width, this.autofocus = false, this.keyboardType =TextInputType.text}) : super(key: key);
+   MMTextField({Key? key, this.text = "",required this.controller,this.onChanged,this.onSuffixIconTap,this.actionText,this.actionColor=Colors.white,this.actionBackgroundColor, required this.width, this.autofocus = false, this.keyboardType =TextInputType.text, this.inputColor = cmTextFieldInputColor,this.onTap, this.readOnly=false }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CmTextField(
+      readOnly: readOnly,
+      onTap: onTap,
+      inputColor: inputColor,
       keyboardType: keyboardType,
       autofocus: autofocus,
       controller: controller,

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moment/helpers/config.dart';
 import 'package:moment/helpers/widgets/cm_button.dart';
-import 'package:moment/helpers/widgets/cm_container.dart';
 import 'package:moment/helpers/widgets/cm_text.dart';
 import 'package:moment/helpers/widgets/cm_text_field.dart';
 
@@ -131,10 +130,10 @@ showAlertCheckAvailableDate({
           height: 16,
         ),
         Row(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             CmButton(
-              backgroundColor: Colors.white,
+              backgroundColor:primaryColor,
                 marginTop: 0,
                 marginBottom: 0,
                 padding: 0,
@@ -142,7 +141,7 @@ showAlertCheckAvailableDate({
                 width: buttonWidth,
                 child: const CmText(
                   text: "Add",
-                  color: primaryColor,
+                  color: Colors.white,
                   fontSize: 17,
                 ),
             ),
@@ -151,6 +150,8 @@ showAlertCheckAvailableDate({
                 Get.back();
               },
               backgroundColor: Colors.white,
+              borderWidth: 2,
+              borderColor: primaryColor,
               marginTop: 0,
               marginBottom: 0,
               padding: 0,
@@ -158,7 +159,7 @@ showAlertCheckAvailableDate({
               width: buttonWidth,
               child: const CmText(
                 text: "Cancel",
-                color: Color(0xFF211522),
+                color: primaryColor,
                 fontSize: 17,
               ),
             ),

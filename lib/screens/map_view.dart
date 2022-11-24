@@ -1,10 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:moment/helpers/widgets/cm_button.dart';
 import 'package:moment/helpers/widgets/cm_container.dart';
 import 'package:moment/helpers/widgets/cm_positioned.dart';
 import 'package:moment/helpers/widgets/cm_text.dart';
+import 'package:moment/screens/search_location.dart';
 import 'package:moment/utils/constants.dart';
 import 'package:moment/widgets/mm_scaffold.dart';
 import 'package:moment/widgets/mm_text_field.dart';
@@ -27,6 +30,7 @@ class MapViewState extends State<MapView> {
   @override
   Widget build(BuildContext context) {
     return MMScaffold(
+      backgroundColor: Colors.white,
       appBarSize: 50,
       bodyPadding: EdgeInsets.all(0),
       appBar: AppBar(
@@ -84,6 +88,38 @@ class MapViewState extends State<MapView> {
                 controller: searchLocationController,
                 width: width(context),
               ),
+            ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: buildMyNavBar(context),
+    );
+  }
+  Widget buildMyNavBar(BuildContext context) {
+    return CmContainer(
+
+      height: 80,
+      color: Colors.white,
+      borderRadiusTopStart: 16,
+      borderRadiusTopEnd: 16,
+      borderColor: Color(0xFFDFD8D0),
+      borderWidthAll: 1,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          CmButton(
+            padding: 0,
+            marginBottom: 0,
+            marginTop: 0,
+            height: 48,
+            width: widthAccordingRation(context, 342),
+            onPressed: (){
+              Get.to(()=> SearchLocation());
+            },
+            child: CmText(
+              text: "Add Location",
+              color: Colors.white,
+              fontSize: 24,
             ),
           ),
         ],

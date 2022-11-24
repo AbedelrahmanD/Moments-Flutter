@@ -6,6 +6,7 @@ import 'package:moment/helpers/widgets/cm_button.dart';
 import 'package:moment/helpers/widgets/cm_container.dart';
 import 'package:moment/helpers/widgets/cm_text.dart';
 import 'package:moment/screens/invite_people.dart';
+import 'package:moment/screens/map_view.dart';
 import 'package:moment/utils/constants.dart';
 import 'package:moment/widgets/alert_box.dart';
 import 'package:moment/widgets/mm_app_bar.dart';
@@ -64,6 +65,7 @@ class CreateMomentState extends State<CreateMoment> {
   @override
   Widget build(BuildContext context) {
     return MMScaffold(
+      bodyPadding: EdgeInsets.only(top: 16),
         appBar: MMAppBar(
           title: "Sunday March 8, 2021",
           actions: [
@@ -92,310 +94,333 @@ class CreateMomentState extends State<CreateMoment> {
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    CmContainer(
-                      color: Colors.white,
-                      width: width(context),
-                      paddingAll: 16,
-                      borderRadiusAll: 16,
-                      child: SingleChildScrollView(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                InkWell(
-                                  onTap: (){
-                                    showAlertFillData(
-                                      onPressed: (){
-                                        if(titleController.text.isNotEmpty){
-                                          title = titleController.text;
-                                        }
-                                        setState(() {
-
-                                        });
-                                        Get.back();
-                                      },
-                                      controller: titleController,
-                                      buttonWidth: widthAccordingRation(context, 104),
-                                      width: widthAccordingRation(context, 308),
-                                      placeholder: "Title",
-                                    );
-                                  },
-                                  child: CmText(
-                                    text: title,
-                                    fontSize: 24,
-                                  ),
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    showAlertNoAction(
-                                      widget: CmContainer(
-                                      height: 40,
-                                      child: ListView.builder(
-                                          scrollDirection: Axis.horizontal,
-                                          shrinkWrap: true,
-                                          physics: const BouncingScrollPhysics(),
-                                          itemCount: categories.length,
-                                          itemBuilder: (context, i) {
-                                            return ship(
-                                              width: widthAccordingRation(context, 104),
-                                              text: categories[i],
-                                              onTap: () {
-                                                selectedCategory = categories[i];
-                                                setState(() {});
-                                                Get.back();
-                                              },
-                                              marginTop: 8,
-                                              marginBottom: 8,
-                                              color: selectedCategory == categories[i] ? Colors.white : const Color(
-                                                  0xFF625A63),
-                                              backgroundColor: selectedCategory == categories[i]
-                                                  ? primaryColor
-                                                  : Colors.white,
-                                            );
-                                          }),
-                                    ),);
-                                  },
-                                  child: CmContainer(
-                                    color: const Color(0xFFDEDEDE),
-                                    borderRadiusAll: 16,
-                                    width: 104,
-                                    height: 24,
-                                    child:  Center(
-                                        child: CmText(
-                                          text: selectedCategory,
-                                          fontSize: 12,
-                                          align: TextAlign.center,
-                                        )),
-                                  ),
-                                )
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 16,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                CmContainer(
-                                  width: 14.0,
-                                  height: 14.0,
-                                  child: Image.asset("assets/images/pin.png"),),
-                                const SizedBox(
-                                  width: 8,
-                                ),
-                                const CmText(
-                                  text: "Location",
-                                  fontSize: 16,
-                                  decoration: TextDecoration.underline,
-                                )
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            InkWell(
-                              onTap: (){
-                                showAlertFillData(
-                                  onPressed: (){
-                                    if(timeController.text.isNotEmpty){
-                                      time = timeController.text;
-                                    }
-                                    setState(() {
-
-                                    });
-                                    Get.back();
-                                  },
-                                  controller: timeController,
-                                  buttonWidth: widthAccordingRation(context, 104),
-                                  width: widthAccordingRation(context, 308),
-                                  placeholder: "Time",
-                                );
-                              },
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: CmContainer(
+                        color: Colors.white,
+                        width: width(context),
+                        paddingAll: 16,
+                        borderRadiusAll: 16,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  CmContainer(
-                                    width: 14.0,
-                                    height: 14.0,
-                                    child: Image.asset("assets/images/wallClock.png"),),
-                                  const SizedBox(
-                                    width: 4,
+                                  InkWell(
+                                    onTap: (){
+                                      showAlertFillData(
+                                        onPressed: (){
+                                          if(titleController.text.isNotEmpty){
+                                            title = titleController.text;
+                                          }
+                                          setState(() {
+
+                                          });
+                                          Get.back();
+                                        },
+                                        controller: titleController,
+                                        buttonWidth: widthAccordingRation(context, 104),
+                                        width: widthAccordingRation(context, 308),
+                                        placeholder: "Title",
+                                      );
+                                    },
+                                    child: CmText(
+                                      text: title,
+                                      fontSize: 24,
+                                    ),
                                   ),
-                                   CmText(
-                                    text: time,
-                                    fontSize: 16,
+                                  InkWell(
+                                    onTap: () {
+                                      showAlertNoAction(
+                                        widget: CmContainer(
+                                        height: 40,
+                                        child: ListView.builder(
+                                            scrollDirection: Axis.horizontal,
+                                            shrinkWrap: true,
+                                            physics: const BouncingScrollPhysics(),
+                                            itemCount: categories.length,
+                                            itemBuilder: (context, i) {
+                                              return ship(
+                                                width: widthAccordingRation(context, 104),
+                                                text: categories[i],
+                                                onTap: () {
+                                                  selectedCategory = categories[i];
+                                                  setState(() {});
+                                                  Get.back();
+                                                },
+                                                marginTop: 8,
+                                                marginBottom: 8,
+                                                color: selectedCategory == categories[i] ? Colors.white : const Color(
+                                                    0xFF625A63),
+                                                backgroundColor: selectedCategory == categories[i]
+                                                    ? primaryColor
+                                                    : Colors.white,
+                                              );
+                                            }),
+                                      ),);
+                                    },
+                                    child: CmContainer(
+                                      color: const Color(0xFFDEDEDE),
+                                      borderRadiusAll: 16,
+                                      width: 104,
+                                      height: 24,
+                                      child:  Center(
+                                          child: CmText(
+                                            text: selectedCategory,
+                                            fontSize: 12,
+                                            align: TextAlign.center,
+                                          )),
+                                    ),
                                   )
                                 ],
                               ),
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            InkWell(
-                              onTap: (){
-                                Get.to(()=>const InvitePeople());
-                              },
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  CmContainer(
-                                    width: 14.0,
-                                    height: 14.0,
-                                    child: Image.asset("assets/images/people.png"),),
-                                  const SizedBox(
-                                    width: 4,
-                                  ),
-                                  const CmText(
-                                      text: "Invite",
+                              const SizedBox(
+                                height: 16,
+                              ),
+                              GestureDetector(
+                                onTap: (){
+                                  Get.to(()=>MapView());
+                                },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    CmContainer(
+                                      width: 14.0,
+                                      height: 14.0,
+                                      child: Image.asset("assets/images/pin.png"),),
+                                    const SizedBox(
+                                      width: 8,
+                                    ),
+                                    const CmText(
+                                      text: "Location",
                                       fontSize: 16,
-                                      decoration: TextDecoration.underline)
+                                      decoration: TextDecoration.underline,
+                                    )
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              InkWell(
+                                onTap: (){
+                                  showAlertFillData(
+                                    onPressed: (){
+                                      if(timeController.text.isNotEmpty){
+                                        time = timeController.text;
+                                      }
+                                      setState(() {
+
+                                      });
+                                      Get.back();
+                                    },
+                                    controller: timeController,
+                                    buttonWidth: widthAccordingRation(context, 104),
+                                    width: widthAccordingRation(context, 308),
+                                    placeholder: "Time",
+                                  );
+                                },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    CmContainer(
+                                      width: 14.0,
+                                      height: 14.0,
+                                      child: Image.asset("assets/images/wallClock.png"),),
+                                    const SizedBox(
+                                      width: 4,
+                                    ),
+                                     CmText(
+                                      text: time,
+                                      fontSize: 16,
+                                    )
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              InkWell(
+                                onTap: (){
+                                  Get.to(()=>const InvitePeople());
+                                },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    CmContainer(
+                                      width: 14.0,
+                                      height: 14.0,
+                                      child: Image.asset("assets/images/people.png"),),
+                                    const SizedBox(
+                                      width: 4,
+                                    ),
+                                    const CmText(
+                                        text: "Invite",
+                                        fontSize: 16,
+                                        decoration: TextDecoration.underline)
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: const [
+                                  CmText(
+                                    text: "Repeat",
+                                    fontSize: 16,
+                                  ),
                                 ],
                               ),
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: const [
-                                CmText(
-                                  text: "Repeat",
-                                  fontSize: 16,
-                                ),
-                              ],
-                            ),
-                            CmContainer(
-                              height: 40,
-                              child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  shrinkWrap: true,
-                                  physics: const BouncingScrollPhysics(),
-                                  itemCount: repeatsList.length,
-                                  itemBuilder: (context, i) {
-                                    return ship(
+                              CmContainer(
+                                height: 40,
+                                child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    shrinkWrap: true,
+                                    physics: const BouncingScrollPhysics(),
+                                    itemCount: repeatsList.length,
+                                    itemBuilder: (context, i) {
+                                      return ship(
+                                        width: widthAccordingRation(context, 72),
+                                        text: repeatsList[i],
+                                        onTap: () {
+                                          if(i==0){
+                                            if(chosenRepeats.contains(0)){
+                                              chosenRepeats.removeRange(
+                                                  0, chosenRepeats.length);
+                                            }
+                                            else {
+                                              chosenRepeats.removeRange(
+                                                  0, chosenRepeats.length);
+                                              List allIndex = [0,1,2,3,4,5,6,7];
+                                              chosenRepeats.addAll(allIndex);
+                                            }
+                                          }
+                                          else {
+                                            if(chosenRepeats.contains(i)){
+                                              chosenRepeats.remove(0);
+                                              chosenRepeats.remove(i);
+                                            }
+                                            else{
+                                              chosenRepeats.add(i);
+                                            }
+                                          }
+                                          setState(() {});
+                                        },
+                                        marginTop: 8,
+                                        marginBottom: 8,
+                                        color: chosenRepeats.contains(i) ? Colors.white : const Color(
+                                            0xFF625A63),
+                                        backgroundColor: chosenRepeats.contains(i)
+                                            ? primaryColor
+                                            : const Color(0xFFF2F2F2),
+                                      );
+                                    }),
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: const [
+                                  CmText(
+                                    text: "Can People join?",
+                                    fontSize: 16,
+                                  ),
+                                ],
+                              ),
+                              CmContainer(
+                                height: 40,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    ship(
                                       width: widthAccordingRation(context, 72),
-                                      text: repeatsList[i],
-                                      onTap: () {
-                                        if(chosenRepeats.contains(i)){
-                                          chosenRepeats.remove(i);
-                                        }
-                                        else{
-                                          chosenRepeats.add(i);
-                                        }
-                                        setState(() {});
-                                      },
                                       marginTop: 8,
                                       marginBottom: 8,
-                                      color: chosenRepeats.contains(i) ? Colors.white : const Color(
+                                      text: "Open",
+                                      onTap: () {
+                                        setState(() {
+                                          isOpen = true;
+                                        });
+                                      },
+                                      color: isOpen ? Colors.white : const Color(
                                           0xFF625A63),
-                                      backgroundColor: chosenRepeats.contains(i)
+                                      backgroundColor: isOpen
                                           ? primaryColor
                                           : const Color(0xFFF2F2F2),
-                                    );
-                                  }),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: const [
-                                CmText(
-                                  text: "Can People join?",
-                                  fontSize: 16,
+                                    ),
+                                    ship(
+                                      width: widthAccordingRation(context, 72),
+                                      marginTop: 8,
+                                      marginBottom: 8,
+                                      text: "Invited",
+                                      onTap: () {
+                                        setState(() {
+                                          isOpen = false;
+                                        });
+                                      },
+                                      color: !isOpen ? Colors.white : const Color(
+                                          0xFF625A63),
+                                      backgroundColor: !isOpen
+                                          ? primaryColor
+                                          : const Color(0xFFF2F2F2),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                            CmContainer(
-                              height: 40,
-                              child: Row(
+                              ),
+                              Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  ship(
-                                    width: widthAccordingRation(context, 72),
-                                    marginTop: 8,
-                                    marginBottom: 8,
-                                    text: "Open",
-                                    onTap: () {
-                                      setState(() {
-                                        isOpen = true;
-                                      });
-                                    },
-                                    color: isOpen ? Colors.white : const Color(
-                                        0xFF625A63),
-                                    backgroundColor: isOpen
-                                        ? primaryColor
-                                        : const Color(0xFFF2F2F2),
-                                  ),
-                                  ship(
-                                    width: widthAccordingRation(context, 72),
-                                    marginTop: 8,
-                                    marginBottom: 8,
-                                    text: "Invited",
-                                    onTap: () {
-                                      setState(() {
-                                        isOpen = false;
-                                      });
-                                    },
-                                    color: !isOpen ? Colors.white : const Color(
-                                        0xFF625A63),
-                                    backgroundColor: !isOpen
-                                        ? primaryColor
-                                        : const Color(0xFFF2F2F2),
+                                children: const [
+                                  CmText(
+                                    text: "Privacy",
+                                    fontSize: 16,
                                   ),
                                 ],
                               ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: const [
-                                CmText(
-                                  text: "Privacy",
-                                  fontSize: 16,
+                              CmContainer(
+                                height: 40,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    ship(
+                                      width: widthAccordingRation(context, 72),
+                                      marginTop: 8,
+                                      marginBottom: 8,
+                                      text: "Public",
+                                      onTap: () {
+                                        setState(() {
+                                          isPublic = true;
+                                        });
+                                      },
+                                      color: isPublic ? Colors.white : const Color(
+                                          0xFF625A63),
+                                      backgroundColor: isPublic
+                                          ? primaryColor
+                                          : const Color(0xFFF2F2F2),
+                                    ),
+                                    ship(
+                                      width: widthAccordingRation(context, 72),
+                                      marginTop: 8,
+                                      marginBottom: 8,
+                                      text: "Private",
+                                      onTap: () {
+                                        setState(() {
+                                          isPublic = false;
+                                        });
+                                      },
+                                      color: !isPublic ? Colors.white : const Color(
+                                          0xFF625A63),
+                                      backgroundColor: !isPublic
+                                          ? primaryColor
+                                          : const Color(0xFFF2F2F2),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                            CmContainer(
-                              height: 40,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  ship(
-                                    width: widthAccordingRation(context, 72),
-                                    marginTop: 8,
-                                    marginBottom: 8,
-                                    text: "Public",
-                                    onTap: () {
-                                      setState(() {
-                                        isPublic = true;
-                                      });
-                                    },
-                                    color: isPublic ? Colors.white : const Color(
-                                        0xFF625A63),
-                                    backgroundColor: isPublic
-                                        ? primaryColor
-                                        : const Color(0xFFF2F2F2),
-                                  ),
-                                  ship(
-                                    width: widthAccordingRation(context, 72),
-                                    marginTop: 8,
-                                    marginBottom: 8,
-                                    text: "Private",
-                                    onTap: () {
-                                      setState(() {
-                                        isPublic = false;
-                                      });
-                                    },
-                                    color: !isPublic ? Colors.white : const Color(
-                                        0xFF625A63),
-                                    backgroundColor: !isPublic
-                                        ? primaryColor
-                                        : const Color(0xFFF2F2F2),
-                                  ),
-                                ],
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -406,7 +431,7 @@ class CreateMomentState extends State<CreateMoment> {
                     ),
                     CmContainer(
                       height: 96,
-                      width: widthAccordingRation(context, 338),
+                      width: width(context),
                       color: Colors.white,
                       paddingTop: 16,
                       paddingStart: 18,
@@ -422,6 +447,7 @@ class CreateMomentState extends State<CreateMoment> {
                         child: CmText(
                           text: "Create Moment",
                           color: Colors.white,
+                          fontSize: 24,
                         ),
                       ),
                     ),
