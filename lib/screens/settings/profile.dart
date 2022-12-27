@@ -1,31 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:moment/helpers/config.dart';
 import 'package:moment/helpers/widgets/cm_button.dart';
 import 'package:moment/helpers/widgets/cm_container.dart';
 import 'package:moment/helpers/widgets/cm_text.dart';
-import 'package:moment/screens/edit_information.dart';
-import 'package:moment/screens/settings.dart';
-import 'package:moment/screens/search.dart';
+import 'package:moment/screens/settings/edit_information.dart';
+import 'package:moment/screens/settings/settings.dart';
+import 'package:moment/screens/search_users.dart';
 import 'package:moment/utils/constants.dart';
-import 'package:moment/widgets/home/mm_available_moment.dart';
-import 'package:moment/widgets/home/mm_md_container.dart';
-import 'package:moment/widgets/home/mm_profile_moment.dart';
+import 'package:moment/utils/functions.dart';
 import 'package:moment/widgets/mm_app_bar.dart';
 import 'package:moment/widgets/mm_logo.dart';
 import 'package:moment/widgets/mm_scaffold.dart';
-import 'package:moment/widgets/mm_ship.dart';
+import 'package:moment/widgets/create_moment.dart';
+import 'package:moment/widgets/moments_widgets.dart';
 
 class Profile extends StatefulWidget {
-  const Profile({Key? key}) : super(key: key);
+  final bool isMyProfile;
+  final String userName;
+  const Profile({Key? key, required this.isMyProfile,this.userName= "Ahmed Mohamed"}) : super(key: key);
 
   @override
   _ProfileState createState() => _ProfileState();
 }
 
 class _ProfileState extends State<Profile> {
-  var now = new DateTime.now();
+
   int selectedDate = 0;
   int selectedType = 0;
   String selectedTypeName = categories[0];
@@ -35,6 +35,8 @@ class _ProfileState extends State<Profile> {
 
   List days = [];
 
+  bool isConnected = false;
+
   void onChooseDate(int index) async {
     setState(() {
       selectedDate = index;
@@ -42,32 +44,15 @@ class _ProfileState extends State<Profile> {
     });
   }
 
-  int pageIndex = 0;
-  generateOneWeekForward() {
-    var monthFormatter = new DateFormat('MMMM');
-    var yearFormatter = new DateFormat('yyyy');
-    month = monthFormatter.format(now);
-    year = yearFormatter.format(now);
 
-    var fullDateFormatter = new DateFormat('EEEE MMMM dd, y');
-    var dayNameFormatter = new DateFormat('EEEE');
-    var dateFormatter = new DateFormat('dd');
-    for (int i = 0; i < 7; i++) {
-      final nextDay = DateTime(now.year, now.month, now.day + i);
-      days.add(
-        {
-          "dayName": i == 0 ? "Today" : dayNameFormatter.format(nextDay),
-          "date": dateFormatter.format(nextDay),
-          "fullDate": fullDateFormatter.format(nextDay)
-        },
-      );
-    }
-    selectedDay = days[0]["fullDate"];
-  }
 
   @override
   void initState() {
-    generateOneWeekForward();
+    dynamic data = fillTimeInputs();
+    month = data["month"];
+    year = data["year"];
+    days = data["days"];
+    selectedDay = data["selectedDay"];
     super.initState();
   }
 
@@ -84,7 +69,7 @@ class _ProfileState extends State<Profile> {
         custom: CmContainer(
           width: widthAccordingRation(context, 148),
           height: heightAccordingRation(context, 41.87),
-          child: const MMLogo(),
+          child: MMLogo(),
         ),
         actions: [
           Container(
@@ -96,7 +81,7 @@ class _ProfileState extends State<Profile> {
             ),
             child: IconButton(
               onPressed: () {
-                Get.to(() => const Search());
+                Get.to(() => const SearchUsers());
               },
               icon: const Icon(
                 Icons.search,
@@ -147,7 +132,7 @@ class _ProfileState extends State<Profile> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     CmText(
-                                      text: "Ahmed Mohamed",
+                                      text: widget.userName,
                                       fontSize: 18,
                                     ),
                                     CmText(
@@ -156,7 +141,7 @@ class _ProfileState extends State<Profile> {
                                     ),
                                     CmText(
                                       text: "Member No.11",
-                                      color: Color(0xFF613659),
+                                      color: secondaryColor,
                                       fontSize: 14,
                                     )
                                   ],
@@ -169,10 +154,19 @@ class _ProfileState extends State<Profile> {
                             SizedBox(height: 24,),
                             CmButton(
                               onPressed: (){
-                                Get.to(()=> EditInformation());
+                                if( widget.isMyProfile) {
+                                  Get.to(() => EditInformation());
+                                }
+                                else {
+                                  setState(() {
+                                    isConnected = !isConnected;
+                                  });
+                                }
                               },
                               width: width(context),
-                              child: CmText(text: "Edit Information",color: primaryColor,),
+                              child: CmText(text:
+                              widget.isMyProfile?"Edit Information": isConnected?"Connected":"Connect",
+                                color: primaryColor,),
                               backgroundColor: Colors.white,
                               padding: 0,
                               height: 32,
@@ -192,8 +186,11 @@ class _ProfileState extends State<Profile> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      MMMdContainer(text: month),
-                      MMMdContainer(text: year)
+                      MMMdContainer(
+                          text: month,
+                        width: widthAccordingRation(context, 165)
+                      ),
+                      MMMdContainer(text: year,width: widthAccordingRation(context, 165))
                     ],
                   ),
 
@@ -226,7 +223,7 @@ class _ProfileState extends State<Profile> {
                   CmText(
                     text: selectedDay,
                     isFitted: true,
-                    color: Color(0xFF613659),
+                    color: secondaryColor,
                     fontWeight: FontWeight.bold,
                     fontSize: 24,
                   ),
@@ -238,7 +235,8 @@ class _ProfileState extends State<Profile> {
                         physics: const BouncingScrollPhysics(),
                         itemCount: categories.length,
                         itemBuilder: (context, i) {
-                          return MMShip(
+                          return ship(
+                            width: widthAccordingRation(context, 104),
                             text: categories[i],
                             onTap: () {
                               setState(() {
@@ -263,8 +261,11 @@ class _ProfileState extends State<Profile> {
                       itemBuilder: (context, i) {
                         return moments[selectedTypeName][i]["isAvailable"]
                             ? MMAvailableMoment(
-                                time: moments[selectedTypeName][i]["time"])
+                                time: moments[selectedTypeName][i]["time"],
+                                width: width(context),
+                        )
                             : MMProfileMoment(
+                          width: widthAccordingRation(context, 338),
                                 username: moments[selectedTypeName][i]["moment"]
                                     ["username"],
                                 momentName: moments[selectedTypeName][i]

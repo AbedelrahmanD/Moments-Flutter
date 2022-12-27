@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 var appDir = "ltr".obs;
-const Color primaryColor = Color(0xFFA761C4);
+ Color primaryColor = Color(0xFFA761C4);
+Color secondaryColor = Color(0xFF613659);
+Color thirdColor =Color(0x536D407D);
+Color bgColor = Color(0xffF2F2F2);
 final Map<int, Color> primaryColorMap = {
   50: primaryColor,
   100: primaryColor,
@@ -18,11 +21,11 @@ final MaterialColor primaryColorSwatch = MaterialColor(50, primaryColorMap);
 
 ///***CmTextField
 const Color cmTextFieldHintTextColor = Colors.grey;
-const Color cmTextFieldLabelTextColor = primaryColor;
+ Color cmTextFieldLabelTextColor = primaryColor;
 const Color cmTextFieldInputColor = Colors.transparent;
 const Color cmTextFieldBorderColor = Colors.grey;
-const Color cmTextFieldFocusBorderColor = primaryColor;
-const Color cmTextFieldIconColor = primaryColor;
+ Color cmTextFieldFocusBorderColor = primaryColor;
+const Color cmTextFieldIconColor = Color(0xFFA761C4);
 const double cmTextFieldBorderRadius = 16;
 const double cmTextFieldWidth = 300;
 const double cmTextFieldHeight = 48;
@@ -33,7 +36,7 @@ const double cmTextFieldScrollPadding = 120;
 
 ///***CmButton
 const Color cmButtonColor = Colors.white;
-const Color cmButtonBackgroundColor = primaryColor;
+ Color cmButtonBackgroundColor = primaryColor;
 const Color cmButtonBorderColor = Colors.transparent;
 const Color cmButtonBoxShadowColor = Colors.transparent;
 const double cmButtonPadding = 15.0;

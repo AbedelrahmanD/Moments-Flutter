@@ -62,7 +62,7 @@ class CmDropDown extends StatefulWidget {
       this.hintText = "",
       this.hintTextColor = cmTextFieldHintTextColor,
       this.labelText,
-      this.labelTextColor = cmTextFieldLabelTextColor,
+      this.labelTextColor =const Color(0xFFA761C4),
       this.inputColor = cmTextFieldInputColor,
       this.borderColor = cmTextFieldBorderColor,
       this.borderRadius = cmTextFieldBorderRadius,

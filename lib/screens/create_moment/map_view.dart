@@ -3,12 +3,13 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:moment/helpers/config.dart';
 import 'package:moment/helpers/widgets/cm_button.dart';
 import 'package:moment/helpers/widgets/cm_container.dart';
 import 'package:moment/helpers/widgets/cm_positioned.dart';
 import 'package:moment/helpers/widgets/cm_text.dart';
-import 'package:moment/screens/search_location.dart';
-import 'package:moment/utils/constants.dart';
+import 'package:moment/screens/create_moment/search_location.dart';
+import 'package:moment/utils/functions.dart';
 import 'package:moment/widgets/mm_scaffold.dart';
 import 'package:moment/widgets/mm_text_field.dart';
 
@@ -108,6 +109,7 @@ class MapViewState extends State<MapView> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           CmButton(
+            backgroundColor: primaryColor,
             padding: 0,
             marginBottom: 0,
             marginTop: 0,

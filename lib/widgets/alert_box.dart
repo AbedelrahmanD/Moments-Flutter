@@ -31,6 +31,7 @@ showAlert({required String title}) {
         Padding(
           padding: const EdgeInsets.only(bottom: 8.0),
           child: CmButton(
+            backgroundColor: primaryColor,
             child: const Text("Okay"),
             onPressed: () {
               Get.back();
@@ -40,7 +41,14 @@ showAlert({required String title}) {
       ]);
 }
 
-showAlertNoAction({required Widget widget}) {
+showAlertNoAction({required Widget widget,required controller,required int index,required double shipWidth}) {
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+    if (controller.hasClients) {
+      controller.animateTo(
+        index * shipWidth, duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInQuad,);
+    }
+  });
   return Get.defaultDialog(
     backgroundColor: const Color(0xFFF2F2F2),
     titlePadding: const EdgeInsets.all(4),
@@ -79,6 +87,7 @@ showAlertFillData({
           height: 16,
         ),
         CmButton(
+          backgroundColor: primaryColor,
             onPressed: onPressed,
             marginTop: 0,
             marginBottom: 0,
@@ -157,7 +166,7 @@ showAlertCheckAvailableDate({
               padding: 0,
               height: 44,
               width: buttonWidth,
-              child: const CmText(
+              child:  CmText(
                 text: "Cancel",
                 color: primaryColor,
                 fontSize: 17,

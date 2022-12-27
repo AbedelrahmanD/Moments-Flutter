@@ -3,14 +3,15 @@ import 'package:get/get.dart';
 import 'package:moment/helpers/config.dart';
 import 'package:moment/helpers/widgets/cm_container.dart';
 import 'package:moment/helpers/widgets/cm_text.dart';
-import 'package:moment/utils/constants.dart';
+import 'package:moment/screens/home/home.dart';
+import 'package:moment/screens/login/language_primary_color_settings.dart';
+import 'package:moment/utils/functions.dart';
 import 'package:moment/widgets/alert_box.dart';
 import 'package:moment/widgets/mm_button.dart';
 import 'package:moment/widgets/mm_logo.dart';
 import 'package:moment/widgets/mm_scaffold.dart';
 import 'package:moment/widgets/mm_text_field.dart';
 
-import 'home.dart';
 
 class LoginName extends StatefulWidget {
   const LoginName({Key? key}) : super(key: key);
@@ -27,9 +28,14 @@ class LoginNameState extends State<LoginName> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          iconTheme: const IconThemeData(
+          iconTheme:  IconThemeData(
             color: primaryColor,
           ),
+          actions: [
+            IconButton(onPressed: (){
+              Get.to(()=> LanguageColorSettings());
+            }, icon: Icon(Icons.settings))
+          ],
         ),
         appBarSize: 50,
         backgroundColor: Colors.white,
@@ -40,7 +46,7 @@ class LoginNameState extends State<LoginName> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const MMLogo(),
+                 MMLogo(),
                 SizedBox(
                   height: heightAccordingRation(context,40),
                 ),
@@ -55,13 +61,14 @@ class LoginNameState extends State<LoginName> {
                 MMTextField(
                   controller: nameController,
                   width: widthAccordingRation(context,341),
-                  text: "Real Name",
+                  text: df("realName"),
                   autofocus: true,
                   onChanged: (value){
                     setState(() {
 
                     });
                   },
+                  scrollPadding: 200,
                 ),
                 const SizedBox(
                   height: 8,
@@ -70,13 +77,13 @@ class LoginNameState extends State<LoginName> {
                   padding: const EdgeInsets.symmetric(horizontal: 15.0),
                   child: RichText(
                     textAlign: TextAlign.center,
-                    text: const TextSpan(
+                    text:  TextSpan(
                       style: TextStyle(
                         fontSize: 14.0,
                         color: Colors.black,
                       ),
                       children: <TextSpan>[
-                        TextSpan(text: 'Using your real name enhances your experience In',),
+                        TextSpan(text: df("realNameClarification"),),
                         TextSpan(text: ' MOMENTS', style: TextStyle(color: primaryColor)),
                       ],
                     ),
@@ -97,17 +104,18 @@ class LoginNameState extends State<LoginName> {
                       Get.to(() => const Home());
                     }
                   },
-                  text: "Next",
+                  text: df(("next")),
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisSize: MainAxisSize.max,
                   children: [
-                    Container(),
+                    // Container(),
                     InkWell(
                       onTap: (){
-                        Get.off(() => const Home());
+                        Get.to(() => const Home());
                       },
-                        child: const CmText(text: "SKIP",align: TextAlign.end,fontSize: 14,color:primaryColor,decoration: TextDecoration.underline,)),
+                        child:  CmText(text: df("skip"),align: TextAlign.end,fontSize: 14,color:primaryColor,decoration: TextDecoration.underline,)),
                   ],
                 ),
               ],

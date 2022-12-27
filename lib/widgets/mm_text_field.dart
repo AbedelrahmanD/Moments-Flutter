@@ -6,26 +6,29 @@ import 'package:moment/helpers/widgets/cm_container.dart';
 import 'package:moment/helpers/widgets/cm_text_field.dart';
 import 'package:moment/helpers/widgets/cm_text.dart';
 
-class MMTextField extends StatelessWidget {
-  final String text;
-  final String? actionText;
-  final Color actionColor;
-  final double width;
-  final bool autofocus;
-  final TextEditingController controller;
-  final Function(String)? onChanged;
-  final TextInputType keyboardType ;
-   Color? actionBackgroundColor;
-  final Function()? onSuffixIconTap;
-  final Color inputColor;
-  final Function()? onTap;
-  final bool readOnly;
 
-   MMTextField({Key? key, this.text = "",required this.controller,this.onChanged,this.onSuffixIconTap,this.actionText,this.actionColor=Colors.white,this.actionBackgroundColor, required this.width, this.autofocus = false, this.keyboardType =TextInputType.text, this.inputColor = cmTextFieldInputColor,this.onTap, this.readOnly=false }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return CmTextField(
+Widget MMTextField (
+{
+ String text = "",
+String? actionText,
+Color actionColor=Colors.white,
+required double width,
+bool autofocus = false,
+required TextEditingController controller,
+Function(String)? onChanged,
+TextInputType keyboardType =TextInputType.text,
+Color? actionBackgroundColor,
+Function()? onSuffixIconTap,
+Color inputColor = cmTextFieldInputColor,
+Function()? onTap,
+bool readOnly = false,
+  double textContainerWidth = 80,
+  double scrollPadding = 20,
+}
+    ) {
+  return CmTextField(
+    scrollPadding: scrollPadding,
+    focusBorderColor: primaryColor,
       readOnly: readOnly,
       onTap: onTap,
       inputColor: inputColor,
@@ -37,27 +40,27 @@ class MMTextField extends StatelessWidget {
       hintText: text,
       onSuffixIconTap: onSuffixIconTap,
       onChanged: onChanged,
-        borderColor:const Color(0xFFF2F2F2),
+      borderColor:const Color(0xFFF2F2F2),
       width: width,
       labelTextColor:const Color(0xFFC4C4C6) ,
       suffixWidget:actionText!=null
           ? CmContainer(
-        paddingAll: 10,
-        width: 100,
+        paddingBottom: 10,
+        paddingTop: 10,
+        marginEnd: 16,
+        width: textContainerWidth,
+        height: 19,
         child: CmContainer(
             color: actionBackgroundColor??primaryColor,
-            height: 5,
-            borderRadiusAll: 20,
-            width: 100,
+            borderRadiusAll: 16,
             child: Center(
               child: CmText(
-                text: actionText??"",
+                text: actionText,
                 color: actionColor,
                 fontSize: 14,
               ),
             )),
       )
           :null
-    );
-  }
+  );
 }

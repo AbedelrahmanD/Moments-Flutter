@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:moment/helpers/config.dart';
 import 'package:moment/helpers/widgets/cm_container.dart';
 import 'package:moment/helpers/widgets/cm_text.dart';
-import 'package:moment/screens/settings.dart';
-import 'package:moment/screens/search.dart';
+import 'package:moment/screens/settings/settings.dart';
+import 'package:moment/screens/search_users.dart';
 import 'package:moment/utils/constants.dart';
-import 'package:moment/widgets/home/mm_available_moment.dart';
-import 'package:moment/widgets/home/mm_md_container.dart';
-import 'package:moment/widgets/home/mm_taken_moment.dart';
+import 'package:moment/utils/functions.dart';
 import 'package:moment/widgets/mm_app_bar.dart';
 import 'package:moment/widgets/mm_logo.dart';
 import 'package:moment/widgets/mm_scaffold.dart';
-import 'package:moment/widgets/mm_ship.dart';
+import 'package:moment/widgets/create_moment.dart';
+import 'package:moment/widgets/moments_widgets.dart';
 
 class MyMoments extends StatefulWidget {
   const MyMoments({Key? key}) : super(key: key);
@@ -40,30 +38,14 @@ class _MyMomentsState extends State<MyMoments> {
       selectedDay = days[index]["fullDate"];
     });
   }
-  int pageIndex = 0;
-  generateOneWeekForward () {
-
-    var monthFormatter = new DateFormat('MMMM');
-    var yearFormatter = new DateFormat('yyyy');
-    month = monthFormatter.format(now);
-    year = yearFormatter.format(now);
-
-    var fullDateFormatter = new DateFormat('EEEE MMMM dd, y');
-    var dayNameFormatter = new DateFormat('EEEE');
-    var dateFormatter = new DateFormat('dd');
-    for(int i=0;i<7;i++){
-      final nextDay = DateTime(now.year, now.month, now.day + i);
-      days.add( {
-        "dayName": i==0 ? "Today" :dayNameFormatter.format(nextDay),
-        "date":dateFormatter.format(nextDay),
-        "fullDate":fullDateFormatter.format(nextDay)},);
-    }
-    selectedDay = days[0]["fullDate"];
-  }
 
   @override
   void initState() {
-    generateOneWeekForward();
+    dynamic data = fillTimeInputs();
+    month = data["month"];
+    year = data["year"];
+    days = data["days"];
+    selectedDay = data["selectedDay"];
     super.initState();
   }
 
@@ -83,7 +65,7 @@ class _MyMomentsState extends State<MyMoments> {
           custom: CmContainer(
             width: widthAccordingRation(context, 148),
             height: heightAccordingRation(context, 41.87),
-            child: const MMLogo(),
+            child: MMLogo(),
           ),
           actions:  [
             Container(
@@ -94,7 +76,7 @@ class _MyMomentsState extends State<MyMoments> {
                 color: Color(0xFFF2F2F2),
               ),
               child:  IconButton(onPressed: (){
-                Get.to(()=> const Search());
+                Get.to(()=> const SearchUsers());
               }, icon: const Icon(Icons.search,size: 16,color: Color(0x3C3C434D),),),
             ),
           ],
@@ -108,8 +90,8 @@ class _MyMomentsState extends State<MyMoments> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children:  [
-                  MMMdContainer(text: month),
-                  MMMdContainer(text: year)
+                  MMMdContainer(text: df(month),width: widthAccordingRation(context, 165),),
+                  MMMdContainer(text: year,width: widthAccordingRation(context, 165),)
                 ],
               ),
               SizedBox(
@@ -125,6 +107,7 @@ class _MyMomentsState extends State<MyMoments> {
                     itemBuilder:
                         (BuildContext context, int index) {
                       return weekWidget(
+                        width: widthAccordingRation(context, 104),
                           onTap: () =>
                               onChooseDate(index),
                           color: selectedDate == index
@@ -132,7 +115,7 @@ class _MyMomentsState extends State<MyMoments> {
                               : Colors.white,
                           textColor: selectedDate == index?
                           Colors.white: const Color(0xFF211522),
-                          dayName: days[index]["dayName"],
+                          dayName: df(days[index]["dayName"]),
                           date: days[index]["date"]
                       );
                     }),
@@ -143,7 +126,7 @@ class _MyMomentsState extends State<MyMoments> {
               CmText(
                 text: selectedDay,
                 isFitted: true,
-                color: Color(0xFF613659),
+                color: secondaryColor,
                 fontWeight: FontWeight.bold,
                 fontSize: 24,
               ),
@@ -155,7 +138,7 @@ class _MyMomentsState extends State<MyMoments> {
                     physics: const BouncingScrollPhysics(),
                     itemCount: categories.length,
                     itemBuilder: (context, i) {
-                      return MMShip(text: categories[i],
+                      return ship(text: df(categories[i]),
                         onTap: (){
                           setState(() {
                             selectedType=i;
@@ -163,7 +146,7 @@ class _MyMomentsState extends State<MyMoments> {
                           });
                         },
                         color: selectedType==i ? Colors.white : Colors.grey,
-                        backgroundColor: selectedType==i ? primaryColor : Colors.white,
+                        backgroundColor: selectedType==i ? primaryColor : Colors.white, width: widthAccordingRation(context, 104),
                       );
                     }),
               ),
@@ -176,11 +159,15 @@ class _MyMomentsState extends State<MyMoments> {
                   itemCount: moments[selectedTypeName].length,
                   itemBuilder: (context, i) {
                     return moments[selectedTypeName][i]["isAvailable"]?
-                    MMAvailableMoment(time: moments[selectedTypeName][i]["time"]):
+                    MMAvailableMoment(
+                        time: moments[selectedTypeName][i]["time"],
+                        width: width(context),
+                    ):
                     MMTakenMoment(
+                      width: width(context),
                       username: moments[selectedTypeName][i]["moment"]["username"],
-                      momentName: moments[selectedTypeName][i]["moment"]["momentName"],
-                      type: moments[selectedTypeName][i]["moment"]["type"],
+                      momentName: df(moments[selectedTypeName][i]["moment"]["momentName"]),
+                      type: df(moments[selectedTypeName][i]["moment"]["type"]),
                       time: moments[selectedTypeName][i]["time"],
                       location: moments[selectedTypeName][i]["moment"]["location"],
                       people: moments[selectedTypeName][i]["moment"]["people"],
@@ -192,38 +179,5 @@ class _MyMomentsState extends State<MyMoments> {
       )
     ;
   }
-  Widget weekWidget (
-      {
-        required VoidCallback onTap,
-        required Color color,
-        required Color textColor,
-        required String dayName,
-        required String date
-      }
-      ) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 8.0),
-      child: InkWell(
-        onTap: onTap,
-        child: CmContainer(
-          color: color,
-          width: widthAccordingRation(context, 104),
-          height: 88,
-          borderRadiusAll: 16,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children:  [
-              Padding(
-                padding: const EdgeInsets.only(top: 3.0),
-                child: CmText(text: dayName,fontSize: 17,color: textColor),
-              ),
-              CmText(text: date,fontSize: 32,color: textColor)
-              // child,
-              // child,
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+
 }

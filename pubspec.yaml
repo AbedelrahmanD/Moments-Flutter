@@ -32,7 +32,7 @@ dependencies:
   flutter:
     sdk: flutter
   get: ^4.6.5
-  get_storage: ^2.0.3
+  shared_preferences: ^2.0.13
   connectivity_plus: ^2.3.5
   cached_network_image: ^3.2.1
   extended_image: ^6.2.1

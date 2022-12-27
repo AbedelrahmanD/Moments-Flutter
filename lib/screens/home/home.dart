@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:moment/helpers/config.dart';
 import 'package:moment/helpers/widgets/cm_container.dart';
 import 'package:moment/helpers/widgets/cm_text.dart';
-import 'package:moment/screens/inbox.dart';
-import 'package:moment/screens/my_moments.dart';
-import 'package:moment/screens/people_moments.dart';
+import 'package:moment/screens/home/inbox.dart';
+import 'package:moment/screens/home/my_moments.dart';
+import 'package:moment/screens/home/people_moments.dart';
+import 'package:moment/utils/functions.dart';
 
 
 
@@ -48,10 +50,10 @@ class _HomeState extends State<Home> {
                 children: [
                   Icon(
                     Icons.person,
-                    color: pageIndex == 0? Color(0xFF613659) :Color(0x536D407D),
+                    color: pageIndex == 0? secondaryColor :thirdColor,
                     size: 35,
                   ),
-                  CmText(text: "My\n Moments",color: pageIndex == 0? Color(0xFF613659) :Color(0x536D407D),fontSize: 12,align: TextAlign.center,)
+                  CmText(text: "My\n Moments",color: pageIndex == 0? secondaryColor :thirdColor,fontSize: 12,align: TextAlign.center,)
                 ],
               ),
             ),
@@ -68,10 +70,10 @@ class _HomeState extends State<Home> {
                 children: [
                   Icon(
                     Icons.people,
-                    color: pageIndex == 1? Color(0xFF613659) :Color(0x536D407D),
+                    color: pageIndex == 1? secondaryColor :thirdColor,
                     size: 35,
                   ),
-                  CmText(text: "People\n Moments",color: pageIndex == 1? Color(0xFF613659) :Color(0x536D407D),fontSize: 12,align: TextAlign.center,)
+                  CmText(text: "People\n Moments",color: pageIndex == 1? secondaryColor :thirdColor,fontSize: 12,align: TextAlign.center,)
                 ],
               ),
             ),
@@ -88,10 +90,10 @@ class _HomeState extends State<Home> {
                 children: [
                   Icon(
                     Icons.inbox,
-                    color: pageIndex == 2? Color(0xFF613659) :Color(0x536D407D),
+                    color: pageIndex == 2? secondaryColor :thirdColor,
                     size: 35,
                   ),
-                  CmText(text: "Inbox",color: pageIndex == 2? Color(0xFF613659) :Color(0x536D407D),fontSize: 12,align: TextAlign.center,)
+                  CmText(text: df("Inbox"),color: pageIndex == 2? secondaryColor :thirdColor,fontSize: 12,align: TextAlign.center,)
                 ],
               ),
             ),

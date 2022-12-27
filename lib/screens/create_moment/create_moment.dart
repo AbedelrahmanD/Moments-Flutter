@@ -2,16 +2,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moment/helpers/config.dart';
-import 'package:moment/helpers/widgets/cm_button.dart';
 import 'package:moment/helpers/widgets/cm_container.dart';
 import 'package:moment/helpers/widgets/cm_text.dart';
-import 'package:moment/screens/invite_people.dart';
-import 'package:moment/screens/map_view.dart';
-import 'package:moment/utils/constants.dart';
+import 'package:moment/screens/create_moment/invite_people.dart';
+import 'package:moment/screens/create_moment/map_view.dart';
+import 'package:moment/utils/functions.dart';
 import 'package:moment/widgets/alert_box.dart';
 import 'package:moment/widgets/mm_app_bar.dart';
 import 'package:moment/widgets/mm_scaffold.dart';
-import 'package:moment/widgets/mmw_create_moment.dart';
+import 'package:moment/widgets/create_moment.dart';
+import 'package:moment/widgets/moments_widgets.dart';
 
 class CreateMoment extends StatefulWidget {
   const CreateMoment({Key? key}) : super(key: key);
@@ -26,6 +26,8 @@ class CreateMomentState extends State<CreateMoment> {
 
   TextEditingController timeController = TextEditingController();
   String time = "00:00 - 01:00";
+
+  final ScrollController _controller= ScrollController(keepScrollOffset: true);
 
   List categories = [
     "Personal",
@@ -50,6 +52,7 @@ class CreateMomentState extends State<CreateMoment> {
   ];
 
   String selectedCategory = "";
+  int selectedCategoryIndex = 0;
   List chosenRepeats = [];
 
   bool isOpen = false;
@@ -135,18 +138,24 @@ class CreateMomentState extends State<CreateMoment> {
                                   InkWell(
                                     onTap: () {
                                       showAlertNoAction(
+                                        shipWidth: widthAccordingRation(context, 104),
+                                        index: selectedCategoryIndex,
+                                        controller: _controller,
                                         widget: CmContainer(
                                         height: 40,
                                         child: ListView.builder(
+                                            controller: _controller,
                                             scrollDirection: Axis.horizontal,
                                             shrinkWrap: true,
                                             physics: const BouncingScrollPhysics(),
                                             itemCount: categories.length,
                                             itemBuilder: (context, i) {
                                               return ship(
-                                                width: widthAccordingRation(context, 104),
+                                                width: widthAccordingRation(context, 104)-8,
                                                 text: categories[i],
+
                                                 onTap: () {
+                                                  selectedCategoryIndex = i;
                                                   selectedCategory = categories[i];
                                                   setState(() {});
                                                   Get.back();
@@ -416,9 +425,37 @@ class CreateMomentState extends State<CreateMoment> {
                                           ? primaryColor
                                           : const Color(0xFFF2F2F2),
                                     ),
+
                                   ],
                                 ),
                               ),
+                              // Container(
+                              //   height: 50,
+                              //   child: ListView.builder(
+                              //       controller: _controller,
+                              //       scrollDirection: Axis.horizontal,
+                              //       shrinkWrap: true,
+                              //       physics: const BouncingScrollPhysics(),
+                              //       itemCount: categories.length,
+                              //       itemBuilder: (context, i) {
+                              //         return ship(
+                              //           width: widthAccordingRation(context, 104),
+                              //           text: categories[i],
+                              //           onTap: () {
+                              //             selectedCategory = categories[i];
+                              //             setState(() {});
+                              //             Get.back();
+                              //           },
+                              //           marginTop: 8,
+                              //           marginBottom: 8,
+                              //           color: selectedCategory == categories[i] ? Colors.white : const Color(
+                              //               0xFF625A63),
+                              //           backgroundColor: selectedCategory == categories[i]
+                              //               ? primaryColor
+                              //               : Colors.white,
+                              //         );
+                              //       }),
+                              // ),
                             ],
                           ),
                         ),
@@ -429,27 +466,12 @@ class CreateMomentState extends State<CreateMoment> {
                         height: 25,
                       ),
                     ),
-                    CmContainer(
-                      height: 96,
-                      width: width(context),
-                      color: Colors.white,
-                      paddingTop: 16,
-                      paddingStart: 18,
-                      paddingEnd: 18,
-                      paddingBottom: 32,
-                      borderRadiusTopStart: 16,
-                      borderRadiusTopEnd: 16,
-                      child: const CmButton(
-                        padding: 0,
-                        marginBottom: 0,
-                        marginTop: 0,
-                        height: 48,
-                        child: CmText(
-                          text: "Create Moment",
-                          color: Colors.white,
-                          fontSize: 24,
-                        ),
-                      ),
+                    bottomButton(
+                      context: context,
+                      text: "Create Moment",
+                      onPress: (){
+                        Get.back();
+                      },
                     ),
                   ],
                 ),

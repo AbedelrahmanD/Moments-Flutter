@@ -2,425 +2,12 @@
 
 import 'dart:math';
 
-import 'package:flutter/material.dart';
-
+import 'package:moment/utils/functions.dart';
 
 double designScreenWidth = 375.0;
 double designScreenHeight = 812.0;
 
-// dynamic moments =
-// {
-//   "all" : [
-//     {
-//       "time":"00:00 - 01:30",
-//       "isAvailable": false,
-//       "moment": {"username":"Dr. Zaidan Alenezi",
-//         "momentName":"Watch the match",
-//         "type":"Entertainment",
-//         "location":"VOX Cinema - Red Sea Mall",
-//         "people":"12 People"}
-//     },
-//     {
-//       "time":"01:30 - 02:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"02:00 - 04:30",
-//       "isAvailable": false,
-//       "moment": {"username":"Dr. Zaidan Alenezi","momentName":"Watch the match","type":"Entertainment","location":"Al Rabeea Café - Jeddah","people":"12 People"}
-//     },
-//     {
-//       "time":"05:00 - 06:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"06:00 - 07:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"07:00 - 08:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"08:00 - 11:00",
-//       "isAvailable": false,
-//       "moment": {"username":"Dr. Zaidan Alenezi","momentName":"Business Meeting","type":"Business","location":"Business Park","people":"12 People"}
-//     },
-//   ],
-//   "Personal" : [
-//     {
-//       "time":"00:00 - 01:30",
-//       "isAvailable": false,
-//       "moment": {"username":"Dr. Zaidan Alenezi",
-//         "momentName":"Watch the match",
-//         "type":"Entertainment",
-//         "location":"VOX Cinema - Red Sea Mall",
-//         "people":"12 People"}
-//     },
-//     {
-//       "time":"01:30 - 02:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"02:00 - 04:30",
-//       "isAvailable": false,
-//       "moment": {"username":"Dr. Zaidan Alenezi","momentName":"Watch the match","type":"Entertainment","location":"Al Rabeea Café - Jeddah","people":"12 People"}
-//     },
-//     {
-//       "time":"05:00 - 06:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"06:00 - 07:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"07:00 - 08:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"08:00 - 11:00",
-//       "isAvailable": false,
-//       "moment": {"username":"Dr. Zaidan Alenezi","momentName":"Business Meeting","type":"Business","location":"Business Park","people":"12 People"}
-//     },
-//   ],
-//   "Business" : [
-//     {
-//       "time":"00:00 - 01:30",
-//       "isAvailable": false,
-//       "moment": {"username":"Dr. Zaidan Alenezi",
-//         "momentName":"Watch the match",
-//         "type":"Entertainment",
-//         "location":"VOX Cinema - Red Sea Mall",
-//         "people":"12 People"}
-//     },
-//     {
-//       "time":"01:30 - 02:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"02:00 - 04:30",
-//       "isAvailable": false,
-//       "moment": {"username":"Dr. Zaidan Alenezi","momentName":"Watch the match","type":"Entertainment","location":"Al Rabeea Café - Jeddah","people":"12 People"}
-//     },
-//     {
-//       "time":"05:00 - 06:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"06:00 - 07:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"07:00 - 08:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"08:00 - 11:00",
-//       "isAvailable": false,
-//       "moment": {"username":"Dr. Zaidan Alenezi","momentName":"Business Meeting","type":"Business","location":"Business Park","people":"12 People"}
-//     },
-//   ],
-//   "Restaurant" : [
-//     {
-//       "time":"00:00 - 01:30",
-//       "isAvailable": false,
-//       "moment": {"username":"Dr. Zaidan Alenezi",
-//         "momentName":"Watch the match",
-//         "type":"Entertainment",
-//         "location":"VOX Cinema - Red Sea Mall",
-//         "people":"12 People"}
-//     },
-//     {
-//       "time":"01:30 - 02:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"02:00 - 04:30",
-//       "isAvailable": false,
-//       "moment": {"username":"Dr. Zaidan Alenezi","momentName":"Watch the match","type":"Entertainment","location":"Al Rabeea Café - Jeddah","people":"12 People"}
-//     },
-//     {
-//       "time":"05:00 - 06:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"06:00 - 07:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"07:00 - 08:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"08:00 - 11:00",
-//       "isAvailable": false,
-//       "moment": {"username":"Dr. Zaidan Alenezi","momentName":"Business Meeting","type":"Business","location":"Business Park","people":"12 People"}
-//     },
-//   ],
-//   "Cafe" : [
-//     {
-//       "time":"00:00 - 01:30",
-//       "isAvailable": false,
-//       "moment": {"username":"Dr. Zaidan Alenezi",
-//         "momentName":"Watch the match",
-//         "type":"Entertainment",
-//         "location":"VOX Cinema - Red Sea Mall",
-//         "people":"12 People"}
-//     },
-//     {
-//       "time":"01:30 - 02:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"02:00 - 04:30",
-//       "isAvailable": false,
-//       "moment": {"username":"Dr. Zaidan Alenezi","momentName":"Watch the match","type":"Entertainment","location":"Al Rabeea Café - Jeddah","people":"12 People"}
-//     },
-//     {
-//       "time":"05:00 - 06:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"06:00 - 07:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"07:00 - 08:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"08:00 - 11:00",
-//       "isAvailable": false,
-//       "moment": {"username":"Dr. Zaidan Alenezi","momentName":"Business Meeting","type":"Business","location":"Business Park","people":"12 People"}
-//     },
-//   ],
-//   "all" : [
-//     {
-//       "time":"00:00 - 01:30",
-//       "isAvailable": false,
-//       "moment": {"username":"Dr. Zaidan Alenezi",
-//         "momentName":"Watch the match",
-//         "type":"Entertainment",
-//         "location":"VOX Cinema - Red Sea Mall",
-//         "people":"12 People"}
-//     },
-//     {
-//       "time":"01:30 - 02:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"02:00 - 04:30",
-//       "isAvailable": false,
-//       "moment": {"username":"Dr. Zaidan Alenezi","momentName":"Watch the match","type":"Entertainment","location":"Al Rabeea Café - Jeddah","people":"12 People"}
-//     },
-//     {
-//       "time":"05:00 - 06:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"06:00 - 07:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"07:00 - 08:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"08:00 - 11:00",
-//       "isAvailable": false,
-//       "moment": {"username":"Dr. Zaidan Alenezi","momentName":"Business Meeting","type":"Business","location":"Business Park","people":"12 People"}
-//     },
-//   ],
-//   "all" : [
-//     {
-//       "time":"00:00 - 01:30",
-//       "isAvailable": false,
-//       "moment": {"username":"Dr. Zaidan Alenezi",
-//         "momentName":"Watch the match",
-//         "type":"Entertainment",
-//         "location":"VOX Cinema - Red Sea Mall",
-//         "people":"12 People"}
-//     },
-//     {
-//       "time":"01:30 - 02:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"02:00 - 04:30",
-//       "isAvailable": false,
-//       "moment": {"username":"Dr. Zaidan Alenezi","momentName":"Watch the match","type":"Entertainment","location":"Al Rabeea Café - Jeddah","people":"12 People"}
-//     },
-//     {
-//       "time":"05:00 - 06:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"06:00 - 07:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"07:00 - 08:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"08:00 - 11:00",
-//       "isAvailable": false,
-//       "moment": {"username":"Dr. Zaidan Alenezi","momentName":"Business Meeting","type":"Business","location":"Business Park","people":"12 People"}
-//     },
-//   ],
-//   "all" : [
-//     {
-//       "time":"00:00 - 01:30",
-//       "isAvailable": false,
-//       "moment": {"username":"Dr. Zaidan Alenezi",
-//         "momentName":"Watch the match",
-//         "type":"Entertainment",
-//         "location":"VOX Cinema - Red Sea Mall",
-//         "people":"12 People"}
-//     },
-//     {
-//       "time":"01:30 - 02:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"02:00 - 04:30",
-//       "isAvailable": false,
-//       "moment": {"username":"Dr. Zaidan Alenezi","momentName":"Watch the match","type":"Entertainment","location":"Al Rabeea Café - Jeddah","people":"12 People"}
-//     },
-//     {
-//       "time":"05:00 - 06:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"06:00 - 07:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"07:00 - 08:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"08:00 - 11:00",
-//       "isAvailable": false,
-//       "moment": {"username":"Dr. Zaidan Alenezi","momentName":"Business Meeting","type":"Business","location":"Business Park","people":"12 People"}
-//     },
-//   ],
-//   "all" : [
-//     {
-//       "time":"00:00 - 01:30",
-//       "isAvailable": false,
-//       "moment": {"username":"Dr. Zaidan Alenezi",
-//         "momentName":"Watch the match",
-//         "type":"Entertainment",
-//         "location":"VOX Cinema - Red Sea Mall",
-//         "people":"12 People"}
-//     },
-//     {
-//       "time":"01:30 - 02:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"02:00 - 04:30",
-//       "isAvailable": false,
-//       "moment": {"username":"Dr. Zaidan Alenezi","momentName":"Watch the match","type":"Entertainment","location":"Al Rabeea Café - Jeddah","people":"12 People"}
-//     },
-//     {
-//       "time":"05:00 - 06:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"06:00 - 07:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"07:00 - 08:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"08:00 - 11:00",
-//       "isAvailable": false,
-//       "moment": {"username":"Dr. Zaidan Alenezi","momentName":"Business Meeting","type":"Business","location":"Business Park","people":"12 People"}
-//     },
-//   ],
-//   "all" : [
-//     {
-//       "time":"00:00 - 01:30",
-//       "isAvailable": false,
-//       "moment": {"username":"Dr. Zaidan Alenezi",
-//         "momentName":"Watch the match",
-//         "type":"Entertainment",
-//         "location":"VOX Cinema - Red Sea Mall",
-//         "people":"12 People"}
-//     },
-//     {
-//       "time":"01:30 - 02:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"02:00 - 04:30",
-//       "isAvailable": false,
-//       "moment": {"username":"Dr. Zaidan Alenezi","momentName":"Watch the match","type":"Entertainment","location":"Al Rabeea Café - Jeddah","people":"12 People"}
-//     },
-//     {
-//       "time":"05:00 - 06:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"06:00 - 07:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"07:00 - 08:00",
-//       "isAvailable": true,
-//       "moment": null
-//     },
-//     {
-//       "time":"08:00 - 11:00",
-//       "isAvailable": false,
-//       "moment": {"username":"Dr. Zaidan Alenezi","momentName":"Business Meeting","type":"Business","location":"Business Park","people":"12 People"}
-//     },
-//   ],
-// };
+
 
 List categories = [
   "All",
@@ -470,6 +57,7 @@ List momentsName = [
 ];
 
 final random = new Random();
+var now = new DateTime.now();
 
 dynamic moments =
 {
@@ -482,83 +70,67 @@ dynamic moments =
           "momentName":momentsName[random.nextInt(momentsName.length)],
           "type":"${categories[i]}",
           "location":"VOX Cinema - Red Sea Mall",
-          "people":"12 People"}
+          "people":"12 " +df("people")
+        }
       },
       {
         "time":"01:30 - 02:00",
         "isAvailable": isAvailableArray[i][1],
         "moment": {"username":"Dr. Zaidan Alenezi",
-          "momentName":"Watch the match",
+          "momentName":momentsName[random.nextInt(momentsName.length)],
           "type":"${categories[i]}",
           "location":"VOX Cinema - Red Sea Mall",
-          "people":"12 People"}
+          "people":"12 " +df("people")
+        }
       },
       {
         "time":"02:00 - 04:30",
         "isAvailable": isAvailableArray[i][2],
-        "moment": {"username":"Dr. Zaidan Alenezi","momentName":"Watch the match","type":"${categories[i]}","location":"Al Rabeea Café - Jeddah","people":"12 People"}
+        "moment": {"username":"Dr. Zaidan Alenezi","momentName":momentsName[random.nextInt(momentsName.length)],"type":"${categories[i]}","location":"Al Rabeea Café - Jeddah",
+          "people":"12 " +df("people")
+        }
       },
       {
         "time":"05:00 - 06:00",
         "isAvailable": isAvailableArray[i][3],
         "moment": {"username":"Dr. Zaidan Alenezi",
-          "momentName":"Watch the match",
+          "momentName":momentsName[random.nextInt(momentsName.length)],
           "type":"${categories[i]}",
           "location":"VOX Cinema - Red Sea Mall",
-          "people":"12 People"}
+          "people":"12 " +df("people")
+        }
       },
       {
         "time":"06:00 - 07:00",
         "isAvailable": isAvailableArray[i][4],
         "moment": {"username":"Dr. Zaidan Alenezi",
-          "momentName":"Watch the match",
+          "momentName":momentsName[random.nextInt(momentsName.length)],
           "type":"${categories[i]}",
           "location":"VOX Cinema - Red Sea Mall",
-          "people":"12 People"}
+          "people":"12 " +df("people")
+        }
       },
       {
         "time":"07:00 - 08:00",
         "isAvailable": isAvailableArray[i][5],
         "moment": {"username":"Dr. Zaidan Alenezi",
-          "momentName":"Watch the match",
+          "momentName":momentsName[random.nextInt(momentsName.length)],
           "type":"${categories[i]}",
           "location":"VOX Cinema - Red Sea Mall",
-          "people":"12 People"}
+          "people":"12 " +df("people")
+        }
       },
       {
         "time":"08:00 - 11:00",
         "isAvailable": isAvailableArray[i][6],
-        "moment": {"username":"Dr. Zaidan Alenezi","momentName":"Business Meeting","type":"${categories[i]}","location":"Business Park","people":"12 People"}
+        "moment": {"username":"Dr. Zaidan Alenezi","momentName":momentsName[random.nextInt(momentsName.length)],"type":"${categories[i]}","location":"Business Park",
+          "people":"12 " +df("people")
+        }
       },
     ],
 };
 
-fillMoments () {
-  // moments.add(
-  //
-  // )
-}
 
 
-
-double widthAccordingRation (context,double w){
-  double widthScreenRation = width(context)/designScreenWidth;
-  return w * widthScreenRation;
-}
-
-double heightAccordingRation (context,double h){
-  double heightScreenRation = height(context)/designScreenHeight;
-  return h * heightScreenRation;
-}
-
-double width (context, {double? value}) {
-  value ??= 1;
-  return MediaQuery.of(context).size.width * value;
-}
-
-double height (context, {double? value}) {
-  value ??= 1;
-  return MediaQuery.of(context).size.height * value;
-}
 
 

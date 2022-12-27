@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:moment/helpers/config.dart';
-import 'package:moment/screens/login_name.dart';
-import 'package:moment/utils/constants.dart';
+import 'package:moment/screens/login/login_name.dart';
+import 'package:moment/utils/functions.dart';
 import 'package:moment/widgets/alert_box.dart';
 import 'package:moment/widgets/mm_button.dart';
 import 'package:moment/widgets/mm_logo.dart';
@@ -19,13 +19,14 @@ class LoginCode extends StatefulWidget {
 
 class LoginCodeState extends State<LoginCode> {
   TextEditingController codeController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return MMScaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
-          iconTheme: const IconThemeData(
+          iconTheme:  IconThemeData(
             color: primaryColor,
           ),
         ),
@@ -39,7 +40,7 @@ class LoginCodeState extends State<LoginCode> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const MMLogo(),
+                MMLogo(),
                 SizedBox(
                   height: heightAccordingRation(context,48),
                 ),

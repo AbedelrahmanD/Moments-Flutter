@@ -25,7 +25,7 @@ class CmButton extends StatelessWidget {
     required this.child,
     this.padding = cmButtonPadding,
     this.color = cmButtonColor,
-    this.backgroundColor = cmButtonBackgroundColor,
+    required this.backgroundColor,
     this.borderRadius = cmButtonBorderRadius,
     this.borderWidth = cmButtonBorderWidth,
     this.borderColor = cmButtonBorderColor,
